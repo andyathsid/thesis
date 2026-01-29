@@ -1,29 +1,21 @@
 \chapter{METODE PENELITIAN}
 
 \section{Desain Penelitian}
-Penelitian dilakukan melalui adopsi metode Design and Development Research (DDR). DDR menurut \textcite{richeyDesignDevelopmentResearch2014c} adalah metode penelitian yang secara sistematis mempelajari, mengembangkan, dan mengevaluasi produk, alat, atau model untuk menghasilkan solusi praktis sekaligus pengetahuan teoritis yang berbasis empiris. Tahapan dalam DDR terdiri dari tiga fase utama, yaitu analisis kebutuhan, perancangan dan pengembangan, serta evaluasi dan pengujian. Gambar \ref{fig:ddr} memberikan visualisasi dari tahapan dalam DDR. Metode ini digunakan sesuai dengan tujuan penelitian yang mengembangkan dan mengevaluasi sistem agentik untuk identifikasi penyakit tanaman sebagai fokus utama.
+Penelitian ini dilakukan dengan mengadopsi metode \textit{Design and Development} (D\&D) yang dirumuskan oleh \textcite{ellisGuideNoviceResearchers2010}. Metode D\&D didefinisikan sebagai pendekatan sistematis untuk merancang, mengembangkan, dan mengevaluasi suatu produk atau sistem (artefak) sebagai solusi atas permasalahan yang spesifik. Berbeda dengan metode penelitian tradisional yang umumnya berfokus pada pengujian hipotesis atau observasi fenomena, penelitian D\&D menempatkan pengembangan artefak teknologi itu sendiri sebagai kontribusi utama terhadap khazanah pengetahuan. Tujuan utamanya adalah untuk menjembatani kesenjangan antara landasan teoritis dan implementasi praktis melalui penciptaan solusi yang dapat diuji validitas dan efektivitasnya.
 
-\begin{figure}[H]
+Metode ini dipilih karena kesesuaiannya dengan karakteristik penelitian ini yang berfokus pada pengembangan prototipe sistem agentik. Pendekatan D\&D menyediakan kerangka kerja yang terstruktur untuk memandu proses teknis mulai dari konseptualisasi hingga validasi sistem. Hal ini dinilai relevan mengingat luaran penelitian masih terbatas dalam bentuk prototipe yang berhenti pada tahap validasi fungsional dan kinerja, sehingga diperlukan metodologi yang menekankan pada iterasi desain dan pembuktian konsep (\textit{proof of concept}). Tahapan pelaksanaan penelitian mengacu pada enam fase dalam model D\&D, yaitu: (1) identifikasi masalah, (2) deskripsi tujuan, (3) perancangan dan pengembangan, (4) pengujian, (5) evaluasi, dan (6) penyampaian hasil. Alur tahapan tersebut divisualisasikan pada Gambar \ref{fig:dnd}.
+
+\begin{figure}[H] 
     \centering
-    \includegraphics[width=0.8\textwidth]{bab3/ddr.png}
-    \caption{Fase dalam penelitian Design and Development Research}
-    \label{fig:ddr}
+    \includegraphics[width=1\textwidth]{bab3/dnd.png}
+    \caption[Tahapan penelitian metode \textit{Design and Development} (D\&D)]{Tahapan penelitian metode \textit{Design and Development} (D\&D) \parencite{ellisGuideNoviceResearchers2010}}
+    \label{fig:dnd}
 \end{figure}
 
-\section{Prosedur Penelitian}
-Prosedur dari penelitian ini dibagi menjadi beberapa tahapan berdasarkan metode penelitian yang digunakan. Gambar \ref{fig:prosedur_penelitian} memberikan visualisasi dari tahapan penelitian yang diatur secara terurut dan sistematis. Penelitian diawali dengan studi literatur mendalam terhadap penelitian-penelitian terkait untuk mengidentifikasi kesenjangan dan tantangan dalam penerapan AI pada pengembangan sistem untuk identifikasi penyakit tanaman. Tahap berikutnya adalah analisis kebutuhan yang mencakup teknik, pendekatan, dan metode yang relevan untuk mendukung pengembangan sistem. Hasil dari analisis kebutuhan ini menjadi dasar dalam integrasi YOLO, VLM, dan perancangan sistem agentik dengan pendekatan agen LLM. Berdasarkan rancangan tersebut, dilakukan perancangan dan pengembangan modul-modul yang membentuk sistem secara keseluruhan. Modul-modul tersebut meliputi modul deteksi objek tanaman, modul pencarian gambar-teks penyakit tanaman, dan modul pencarian informasi.
+\section{Identifikasi Masalah}
+Identifikasi masalah dalam penelitian ini berawal dari tantangan nyata yang dihadapi dalam diagnosis penyakit tanaman di lapangan. Ketergantungan pada tenaga ahli patologi tumbuhan yang jumlahnya terbatas menyebabkan akses terhadap diagnosis yang akurat menjadi sulit bagi sebagian besar petani dan praktisi pertanian. Di sisi lain, metode pengamatan visual secara manual bersifat subjektif dan rentan terhadap kesalahan, khususnya ketika menghadapi gejala penyakit yang memiliki kemiripan karakteristik visual antarjenis. Meskipun teknologi kecerdasan buatan, khususnya \textit{computer vision}, telah diterapkan untuk otomasi deteksi, solusi yang ada seringkali hanya menghasilkan label klasifikasi sederhana tanpa disertai penjelasan kausalitas atau konteks yang mendalam. Hal ini menciptakan kesenjangan informasi yang menghambat pengguna dalam memahami kondisi tanaman dan mengambil tindakan pengendalian yang tepat.
 
-Modul-modul yang ada akhirnya diintegrasi menjadi sistem agentik yang terpadu. Sistem yang terintegrasi akhirnya dapat diuji dan dievaluasi untuk mengukur performa dan fungsionalitas yang dihasilkan. Sistem juga akan diimplementasikan pada sebuah aplikasi web sebagai antarmuka.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{bab3/prosedurpenelitian.png}
-    \caption{Tahapan dalam prosedur penelitian}
-    \label{fig:prosedur_penelitian}
-\end{figure}
-
-\section{Analisis Kebutuhan}
-Tabel \ref{tab:perangkat_pendukung} menyajikan perangkat pendukung yang digunakan dalam penelitian ini.
+Untuk mengatasi permasalahan tersebut, dibutuhkan suatu sistem yang tidak hanya memiliki kemampuan persepsi visual untuk lokalisasi dan identifikasi penyakit, tetapi juga kemampuan kognitif untuk memberikan penjelasan yang argumentatif dan berbasis bukti. Penelitian ini mengusulkan pendekatan sistem agentik multimodal yang mengintegrasikan model deteksi objek mutakhir seperti YOLOv11 dan OWLv2 dengan agen LLM yang diperkuat oleh mekanisme \textit{Retrieval-Augmented Generation} (RAG). Integrasi ini bertujuan untuk menghadirkan asisten cerdas yang mampu melakukan diagnosis penyakit tanaman secara interaktif, akurat, dan transparan. Dalam merealisasikan sistem dengan kompleksitas tersebut, diperlukan dukungan infrastruktur komputasi dan perangkat lunak yang spesifik. Rincian perangkat keras dan perangkat lunak yang digunakan untuk mendukung seluruh tahapan penelitian ini dirangkum pada Tabel \ref{tab:perangkat_pendukung}.
 
 \begin{table}[H]
     \centering
@@ -65,13 +57,23 @@ Tabel \ref{tab:perangkat_pendukung} menyajikan perangkat pendukung yang digunaka
     \end{tabular}
 \end{table}
 
+\section{Deskripsi Tujuan}
+Berdasarkan identifikasi masalah yang telah diuraikan, tujuan utama dari penelitian ini adalah mengembangkan sistem agentik multimodal yang mampu mengidentifikasi penyakit tanaman serta memberikan penjelasan diagnosis yang berbasis bukti. Sistem ini dirancang sebagai solusi untuk mengatasi keterbatasan metode identifikasi konvensional yang kurang adaptif. Secara rinci, tujuan pengembangan dalam penelitian ini dijabarkan sebagai berikut:
+\begin{enumerate}[nosep]
+    \item Mengembangkan arsitektur sistem agentik menggunakan pola \textit{Reasoning and Acting} (ReAct) yang memungkinkan model bahasa besar untuk memilih dan menggunakan alat bantu secara adaptif dalam proses diagnosis.
+    \item Mengintegrasikan model deteksi objek YOLOv11 dan OWLv2 untuk melokalisasi gejala penyakit pada bagian tanaman secara spesifik.
+    \item Mengimplementasikan modul pencarian multimodal berbasis model SCOLD untuk memungkinkan identifikasi penyakit melalui pencarian kemiripan visual dan tekstual pada basis data vektor.
+    \item Menerapkan mekanisme \textit{Retrieval-Augmented Generation} (RAG) untuk memperkaya respon sistem dengan informasi manajemen penyakit yang faktual dari sumber pengetahuan eksternal.
+    \item Merancang antarmuka pengguna berbasis web yang memfasilitasi interaksi dua arah antara pengguna dan sistem melalui teks dan gambar.
+    \item Mengevaluasi kinerja sistem agentik yang dikembangkan menggunakan pendekatan \textit{LLM-as-a-judge} untuk mengukur akurasi diagnosis dan relevansi saran yang diberikan.
+\end{enumerate}
+
 \section{Perancangan dan Pengembangan}
 Tahap perancangan dan pengembangan difokuskan pada realisasi teknis dari sistem agentik yang diusulkan. Pada bagian ini, arsitektur sistem dan implementasi komponen-komponen utamanya dijabarkan secara rinci. Pembahasan diawali dengan perancangan sistem agentik yang mengadopsi pola ReAct dan pengembangan agen LLM yang berfungsi sebagai pengendali logika sistem. Selanjutnya, uraian dilanjutkan pada pengembangan modul-modul spesifik yang mendukung kapabilitas sistem, meliputi modul deteksi objek tanaman, modul pencarian multimodal gambar-teks, serta modul pencarian informasi. Akhirnya, pengembangan antarmuka pengguna dipaparkan sebagai komponen interaksi antara pengguna dan sistem yang telah dibangun.
 
 \subsection{Sistem Agentik}
-Sistem agentik dalam penelitian ini dirancang dengan mengadopsi pola \textit{Reasoning and Acting} (ReAct). Implementasi sistem dilakukan menggunakan framework LangChain melalui library LangGraph \parencite{chaseLangChain2022}. Arsitektur sistem yang dikembangkan bersifat multimodal, di mana agen mampu menerima dan memproses input berupa citra tanaman serta instruksi tekstual dari pengguna secara bersamaan. Gambar \ref{fig:arsitektur_sistem_agentik} menyajikan arsitektur sistem agentik beserta spesifikasi input dan output pada setiap alat yang terintegrasi.
+Sistem agentik dalam penelitian ini dirancang dengan mengadopsi pola \textit{Reasoning and Acting} (ReAct). Implementasi sistem dilakukan menggunakan framework LangChain melalui library LangGraph \parencite{langchainaiLangChain2025}. Arsitektur sistem yang dikembangkan bersifat multimodal, di mana agen mampu menerima dan memproses input berupa citra tanaman serta instruksi tekstual dari pengguna secara bersamaan. Gambar \ref{fig:arsitektur_sistem_agentik} menyajikan arsitektur sistem agentik beserta spesifikasi input dan output pada setiap alat yang terintegrasi.
 
-%TODO: input gambar nyambung juga harusnya ke owlv2, terus output harusnya bukan cropped images, tapi skor, bounding box, dan gambar teranotasi
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{bab3/arsitektursistemagentik.png}
@@ -79,11 +81,11 @@ Sistem agentik dalam penelitian ini dirancang dengan mengadopsi pola \textit{Rea
     \label{fig:arsitektur_sistem_agentik}
 \end{figure}
 
-Dalam implementasi teknis menggunakan LangGraph, konsep teoritis ReAct yang diajukan oleh \textcite{yaoReActSynergizingReasoning2023} diterjemahkan ke dalam struktur graf berstatus (\textit{stateful graph}). Pada desain aslinya, pola ReAct diimplementasikan secara linier melalui teknik \textit{prompting}, di mana LLM menghasilkan teks terstruktur berisi penalaran (\textit{thought}) dan tindakan (\textit{action}) yang kemudian diurai oleh lingkungan eksternal. Di lain sisi, LangGraph memodelkan agen sebagai sistem yang terdiri dari \text{node} (simpul) dan \textit{edge} (sisi). 
+Dalam implementasi teknis menggunakan LangGraph, konsep teoritis ReAct yang diajukan oleh \textcite{yaoReActSynergizingReasoning2023} diterjemahkan ke dalam struktur graf berstatus (\textit{stateful graph}). Pada desain aslinya, pola ReAct diimplementasikan secara linier melalui teknik \textit{prompting}, di mana LLM menghasilkan teks terstruktur berisi penalaran (\textit{thought}) dan tindakan (\textit{action}) yang kemudian diurai oleh lingkungan eksternal. Di lain sisi, LangGraph memodelkan agen sebagai sistem yang terdiri dari \textit{node} (simpul) dan \textit{edge} (sisi). 
 
-Struktur ini memetakan siklus Thought-Action-Observation ke dalam dua komponen utama, yaitu node Model yang berisi agen dan node Tools yang berisi alat. Node Model bertanggung jawab untuk menentukan apakah suatu tugas memerlukan penggunaan alat berdasarkan konteks yang diberikan. Jika alat diperlukan, LLM akan menghasilkan permintaan pemanggilan alat (\textit{tool call}) yang valid secara skema untuk dieksekusi secara otomatis oleh node Tools. Hasil eksekusi tersebut dikembalikan ke node Model sebagai observasi untuk dianalisis lebih lanjut hingga solusi akhir tercapai. 
+Struktur ini memetakan siklus Thought-Action-Observation ke dalam dua komponen utama, yaitu \textit{node} Model yang berisi agen dan \textit{node} Tools yang berisi alat. \textit{node} Model bertanggung jawab untuk menentukan apakah suatu tugas memerlukan penggunaan alat berdasarkan konteks yang diberikan. Jika alat diperlukan, LLM akan menghasilkan permintaan pemanggilan alat (\textit{tool call}) yang valid secara skema untuk dieksekusi secara otomatis oleh \textit{node} Tools. Hasil eksekusi tersebut dikembalikan ke \textit{node} Model sebagai observasi untuk dianalisis lebih lanjut hingga solusi akhir tercapai. 
 
-Status (\textit{state}) agen dikelola sebagai objek yang menyimpan riwayat pesan, yang berfungsi sebagai memori jangka pendek atau \textit{scratchpad}. Alur kerja dimulai dari node Model, di mana LLM memproses input dan menentukan langkah selanjutnya. Jika model memutuskan untuk menggunakan alat, alur dialihkan melalui conditional edge menuju node Tools. Setelah alat dieksekusi, hasilnya dicatat ke dalam state sebagai observasi, dan kendali dikembalikan ke node Model untuk mengevaluasi informasi baru tersebut. Proses iteratif ini berlanjut hingga model menilai bahwa informasi yang dikumpulkan telah memadai untuk memberikan jawaban akhir (END). Visualisasi perbandingan antara desain teoritis ReAct dengan implementasi berbasis graf pada LangGraph disajikan pada Gambar \ref{fig:react_langgraph_comparison}.
+Status (\textit{state}) agen dikelola sebagai objek yang menyimpan riwayat pesan, yang berfungsi sebagai memori jangka pendek atau \textit{scratchpad}. Alur kerja dimulai dari \textit{node} Model, di mana LLM memproses input dan menentukan langkah selanjutnya. Jika model memutuskan untuk menggunakan alat, alur dialihkan melalui \textit{conditional edge} menuju \textit{node} Tools. Setelah alat dieksekusi, hasilnya dicatat ke dalam state sebagai observasi, dan kendali dikembalikan ke \textit{node} Model untuk mengevaluasi informasi baru tersebut. Proses iteratif ini berlanjut hingga model menilai bahwa informasi yang dikumpulkan telah memadai untuk memberikan jawaban akhir (END). Visualisasi perbandingan antara desain teoritis ReAct dengan implementasi berbasis graf pada LangGraph disajikan pada Gambar \ref{fig:react_langgraph_comparison}.
 
 \begin{figure}[H]
     \centering
@@ -109,13 +111,13 @@ Melalui implementasi arsitektur LangGraph, agen memiliki memori jangka pendek (\
     \begin{tabular}{|l|l|p{4cm}|}
     \hline
     \multicolumn{1}{|c|}{\textbf{Variabel Status}} & \multicolumn{1}{c|}{\textbf{Tipe Data}} & \multicolumn{1}{c|}{\textbf{Deskripsi}} \\ \hline
-    \texttt{messages} & \texttt{list[AnyMessage]} & Menyimpan riwayat seluruh pesan interaksi (percakapan) antara pengguna dan agen sebagai memori jangka pendek (\textit{scratchpad}). \\ \hline
-    \texttt{images} & \texttt{list[dict]} & Menyimpan daftar gambar yang diunggah beserta metadata terkait untuk mendukung penanganan beberapa citra sekaligus. \\ \hline
-    \texttt{detections} & \texttt{list[dict]} & Menyimpan data hasil deteksi objek yang mencakup label, skor kepercayaan, dan koordinat kotak pembatas (\textit{bounding box}). \\ \hline
-    \texttt{plant\_disease\_classifications} & \texttt{list[dict]} & Menyimpan hasil identifikasi penyakit tanaman yang mencakup label prediksi, tingkat kepercayaan, dan metadata pendukung lainnya. \\ \hline
-    \texttt{visualization\_urls} & \texttt{list[str]} & Menyimpan daftar tautan publik dari citra visualisasi hasil deteksi yang telah diunggah ke penyimpanan Cloudflare R2. \\ \hline
-    \texttt{current\_image\_url} & \texttt{str} & Menyimpan URL dari gambar yang sedang menjadi fokus analisis aktif dalam proses iterasi berjalan. \\ \hline
-    \texttt{jump\_to} & \texttt{JumpTo} & Atribut kontrol internal untuk mengelola navigasi alur kerja (\textit{routing}) antar simpul (\textit{node}) dalam arsitektur graf LangGraph. \\ \hline
+    \textit{messages} & \textit{list[AnyMessage]} & Menyimpan riwayat seluruh pesan interaksi (percakapan) antara pengguna dan agen sebagai memori jangka pendek (\textit{scratchpad}). \\ \hline
+    \textit{images} & \textit{list[dict]} & Menyimpan daftar gambar yang diunggah beserta metadata terkait untuk mendukung penanganan beberapa citra sekaligus. \\ \hline
+    \textit{detections} & \textit{list[dict]} & Menyimpan data hasil deteksi objek yang mencakup label, skor kepercayaan, dan koordinat kotak pembatas (\textit{bounding box}). \\ \hline
+    \textit{plant\_disease\_classifications} & \textit{list[dict]} & Menyimpan hasil identifikasi penyakit tanaman yang mencakup label prediksi, tingkat kepercayaan, dan metadata pendukung lainnya. \\ \hline
+    \textit{visualization\_urls} & \textit{list[str]} & Menyimpan daftar tautan publik dari citra visualisasi hasil deteksi yang telah diunggah ke penyimpanan Cloudflare R2. \\ \hline
+    \textit{current\_image\_url} & \textit{str} & Menyimpan URL dari gambar yang sedang menjadi fokus analisis aktif dalam proses iterasi berjalan. \\ \hline
+    \textit{jump\_to} & \textit{JumpTo} & Atribut kontrol internal untuk mengelola navigasi alur kerja (\textit{routing}) antar simpul (\textit{node}) dalam arsitektur graf LangGraph. \\ \hline
     \end{tabular}
 \end{table}
 
@@ -130,11 +132,11 @@ Untuk memastikan stabilitas, keamanan, dan fungsionalitas yang optimal, agen dil
     \begin{tabular}{|l|p{7cm}|}
     \hline
     \multicolumn{1}{|c|}{\textbf{Middleware}} & \multicolumn{1}{c|}{\textbf{Deskripsi Fungsi}} \\ \hline
-    \texttt{get\_system\_prompt} & Menyediakan instruksi dasar, batasan peran, dan panduan penggunaan alat kepada agen. \\ \hline
-    \texttt{handle\_tool\_errors} & Menangkap kegagalan eksekusi pada \textit{tools} dan mengembalikan pesan kesalahan yang informatif agar agen dapat melakukan koreksi secara mandiri. \\ \hline
-    \texttt{model\_retry\_middleware} & Melakukan percobaan ulang otomatis jika terjadi kegagalan koneksi atau batasan kuota (\textit{rate limit}) pada API model. \\ \hline
-    \texttt{tool\_retry\_middleware} & Menangani percobaan ulang jika eksekusi alat eksternal mengalami gangguan teknis sementara. \\ \hline
-    \texttt{model\_fallback\_middleware} & Mekanisme cadangan yang secara otomatis mengalihkan tugas ke model yang lebih tinggi, yakni Gemini 3 Pro apabila model utama gagal merespons. \\ \hline
+    \textit{get\_system\_prompt} & Menyediakan instruksi dasar, batasan peran, dan panduan penggunaan alat kepada agen. \\ \hline
+    \textit{handle\_tool\_errors} & Menangkap kegagalan eksekusi pada \textit{tools} dan mengembalikan pesan kesalahan yang informatif agar agen dapat melakukan koreksi secara mandiri. \\ \hline
+    \textit{model\_retry\_middleware} & Melakukan percobaan ulang otomatis jika terjadi kegagalan koneksi atau batasan kuota (\textit{rate limit}) pada API model. \\ \hline
+    \textit{tool\_retry\_middleware} & Menangani percobaan ulang jika eksekusi alat eksternal mengalami gangguan teknis sementara. \\ \hline
+    \textit{model\_fallback\_middleware} & Mekanisme cadangan yang secara otomatis mengalihkan tugas ke model yang lebih tinggi, yakni Gemini 3 Pro apabila model utama gagal merespons. \\ \hline
     \end{tabular}
 \end{table}
 
@@ -158,9 +160,6 @@ CO-STAR merupakan akronim dari enam komponen utama yang dijelaskan sebagai berik
     \item \textit{Response} (Respons): Menentukan struktur luaran yang diharapkan, mulai dari observasi visual, integrasi konteks pengguna, hingga hipotesis diagnosis dan saran tindak lanjut.
 \end{enumerate}
 
-
-
-
 Selain komponen standar CO-STAR, desain prompt pada sistem ini juga dilengkapi dengan bagian penjelasan alat (\textit{Tools Reference}). Bagian ini berfungsi sebagai dokumentasi teknis yang menjelaskan fungsionalitas, parameter, dan skenario penggunaan dari setiap alat yang terintegrasi, seperti pencarian web, pencarian basis pengetahuan, dan model deteksi visual. Dengan adanya penjelasan alat yang komprehensif, agen dapat memahami cara berinteraksi dengan lingkungan eksternal secara tepat.
 
 \subsection{Modul Deteksi Objek Tanaman}
@@ -178,13 +177,27 @@ Implementasi modul ini menggunakan pendekatan hibrida yang menggabungkan dua ala
 \subsubsection{Alat Deteksi \textit{Closed-Set}}
 Alat deteksi \textit{closed-set} dalam modul ini diimplementasikan menggunakan arsitektur YOLOv11. Pemilihan YOLOv11 didasarkan pada performanya yang unggul dalam menyeimbangkan antara kecepatan inferensi dan akurasi deteksi dibandingkan versi sebelumnya. Model ini dilatih secara khusus untuk mengenali objek daun di lapangan.
 
-\subsubsection{Persiapan Data}
-Dataset yang digunakan untuk melatih model deteksi daun diadopsi dari dataset PlantDoc dari \textcite{singhPlantDocDatasetVisual2020}. Dataset ini dipilih karena mencakup variasi spesies tanaman dan kondisi penyakit yang luas dalam lingkungan alami. Dalam penelitian ini, dilakukan prapemrosesan berupa penyatuan seluruh anotasi kelas yang ada menjadi satu kelas tunggal, yakni "\textit{leaf}" (daun). Hal ini dilakukan untuk memfokuskan model pada tugas lokalisasi daun sebagai \textit{Region of Interest} (RoI) utama. Distribusi data awal dari dataset PlantDoc sebelum penyatuan kelas disajikan pada Gambar \ref{fig:plantdoc_distribution} untuk memberikan gambaran keragaman data yang digunakan.
+\paragraph{Persiapan Dataset Pemodelan}
+Dataset yang digunakan untuk melatih model deteksi daun diadopsi dari dataset PlantDoc dari \textcite{singhPlantDocDatasetVisual2020}. Dataset ini dipilih karena mencakup variasi spesies tanaman dan kondisi penyakit yang luas dalam lingkungan alami. Secara orisinal, dataset ini terdiri dari 2.569 citra yang merepresentasikan 13 spesies tanaman dan terbagi ke dalam 30 kelas kondisi. Dalam penelitian ini, dilakukan prapemrosesan berupa penyatuan seluruh anotasi kelas yang ada menjadi satu kelas tunggal, yakni "\textit{leaf}" (daun). Hal ini dilakukan untuk memfokuskan model pada tugas lokalisasi daun sebagai \textit{Region of Interest} (RoI) utama. Distribusi data awal dari dataset PlantDoc sebelum penyatuan kelas disajikan pada Gambar \ref{fig:plantdoc_distribution} untuk memberikan gambaran keragaman data yang digunakan.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{bab3/plantdoc_distribution.png}
-    \caption{Distribusi Kelas pada Dataset PlantDoc dari \textcite{singhPlantDocDatasetVisual2020}}
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bab3/sampelplantdoc.png}
+        \caption{}
+        \label{fig:plantdoc_sample}
+    \end{subfigure}
+    
+    \vspace{0.5cm}
+    
+    \begin{subfigure}[b]{1\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bab3/plantdoc_distribution.png}
+        \caption{}
+        \label{fig:plantdoc_distribution_sub}
+    \end{subfigure}
+    \caption[Dataset PlantDoc: (a) Sampel citra dan (b) Distribusi kelas]{Dataset PlantDoc dari \textcite{singhPlantDocDatasetVisual2020}: (a) Sampel citra dan (b) Distribusi kelas}
     \label{fig:plantdoc_distribution}
 \end{figure}
 
@@ -210,109 +223,8 @@ Pemodelan dilakukan dengan mengevaluasi tiga variasi skala model YOLOv11, yaitu 
 
 Setelah proses pelatihan selesai, model diekspor ke format ONNX (\textit{Open Neural Network Exchange}) untuk meningkatkan portabilitas dan efisiensi saat dijalankan di lingkungan produksi. Proses ekspor dilakukan dengan pengaturan resolusi sesuai ukuran masukan (\textit{input size}) pada perangkat CPU guna memastikan kompatibilitas dengan keterbatasan sumber daya pada lingkungan server.
 
-\paragraph{Evaluasi}
-Evaluasi model deteksi dilakukan untuk mengukur ketepatan lokalisasi dan klasifikasi objek. Metrik yang digunakan meliputi \textit{Precision}, \textit{Recall}, \textit{F1-score}, serta \textit{mean Average Precision} (mAP) pada ambang batas IoU 50\% (mAP50) dan rentang 50--95\% (mAP50-95). Definisi metrik tersebut diuraikan sebagai berikut:
-
-\begin{enumerate}[nosep]
-    \item IoU (\textit{Intersection over Union}): Mengukur tingkat tumpang tindih antara kotak prediksi ($BB_{pred}$) dan \textit{ground truth} ($BB_{gt}$). Secara praktis, metrik ini menunjukkan seberapa presisi model dalam melokalisasi posisi objek daun yang sebenarnya.
-    \begin{equation}
-        IoU = \frac{Area(BB_{pred} \cap BB_{gt})}{Area(BB_{pred} \cup BB_{gt})}
-    \end{equation}
-
-    \item Precision: Rasio prediksi positif yang benar terhadap total prediksi positif. Metrik ini mengindikasikan tingkat kepercayaan terhadap prediksi model, yakni seberapa sering model benar ketika menyatakan mendeteksi daun dan meminimalkan deteksi palsu.
-    \begin{equation}
-        Precision = \frac{TP}{TP + FP}
-    \end{equation}
-
-    \item Recall: Rasio prediksi positif yang benar terhadap total sampel positif aktual. Metrik ini mengukur sensitivitas model, yakni kemampuannya untuk menemukan seluruh objek daun yang ada dalam citra dan meminimalkan objek yang terlewat.
-    \begin{equation}
-        Recall = \frac{TP}{TP + FN}
-    \end{equation}
-
-    \item F1-score: Rata-rata harmonis antara \textit{precision} dan \textit{recall}. Metrik ini memberikan gambaran keseimbangan performa model, memastikan model tidak hanya berhati-hati dalam mendeteksi tetapi juga mampu menemukan objek sebanyak mungkin.
-    \begin{equation}
-        F1 = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}
-    \end{equation}
-
-    \item mAP (\textit{mean Average Precision}): Rata-rata \textit{Average Precision} (AP) di seluruh kelas. Metrik ini merupakan standar evaluasi menyeluruh yang merepresentasikan keandalan model pada berbagai tingkat ambang batas deteksi.
-    \begin{equation}
-        mAP = \frac{1}{N} \sum_{i=1}^{N} AP_i
-    \end{equation}
-\end{enumerate}
-
-Selain metrik akurasi, evaluasi performa waktu atau latensi inferensi dilakukan untuk mengukur efisiensi model saat dijalankan pada perangkat dengan sumber daya terbatas. Pengukuran latensi dilakukan melalui prosedur \textit{benchmarking} yang dirancang untuk mensimulasikan kondisi penggunaan nyata. Proses ini diawali dengan mengekspor model ke format ONNX (\textit{Open Neural Network Exchange}) dan dijalankan menggunakan \textit{engine} ONNX Runtime dengan penyedia eksekusi CPU (\textit{CPU Execution Provider}).
-
-Prosedur pengujian terdiri dari dua tahap, yaitu fase pemanasan (\textit{warm-up}) dan fase pengujian utama. Fase pemanasan dilakukan sebanyak 30 iterasi untuk menstabilkan performa sistem dan memastikan model telah dimuat sepenuhnya ke dalam memori. Selanjutnya, fase pengujian utama dilakukan sebanyak 300 iterasi menggunakan citra yang dipilih secara acak dari dataset. Pada setiap iterasi, waktu eksekusi dicatat untuk tiga komponen proses: (1) prapemrosesan, yang meliputi \textit{resizing} citra ke resolusi $416 \times 416$ piksel, normalisasi, dan penyusunan \textit{batch}; (2) inferensi model; dan (3) pascapemrosesan, yang meliputi penskalaan koordinat dan penerapan \textit{Non-Maximum Suppression} (NMS). Latensi total dihitung sebagai akumulasi dari ketiga tahapan tersebut. Alur kerja prosedur \textit{benchmarking} ini diilustrasikan pada Gambar \ref{fig:benchmark_flowchart}.
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}[
-        node distance=1.0cm,
-        font=\small,
-        start/.style={circle, draw, fill=blue!10, minimum size=1cm, align=center},
-        process/.style={rectangle, draw, rounded corners, fill=white, minimum width=3.5cm, minimum height=0.8cm, align=center},
-        decision/.style={diamond, draw, fill=yellow!10, aspect=2, inner sep=0pt, minimum width=2.5cm, align=center},
-        arrow/.style={-stealth, thick}
-    ]
-
-    \node (start) [start] {Mulai};
-    \node (init) [process, below=of start] {Inisialisasi Model ONNX\\\& Sampel Citra};
-    \node (warmup) [process, below=of init] {Fase Pemanasan\\(30 Iterasi)};
-    
-    \node (iter_start) [decision, below=of warmup] {Iterasi Uji\\$<$ 300?};
-    
-    \node (pre) [process, below=0.8cm of iter_start] {Prapemrosesan\\(Resize, Normalize)};
-    \node (infer) [process, below=0.5cm of pre] {Inferensi Model\\(ONNX Runtime CPU)};
-    \node (post) [process, below=0.5cm of infer] {Pascapemrosesan\\(NMS, Scaling)};
-    \node (record) [process, below=0.5cm of post] {Catat Latensi Total};
-    
-    \node (calc) [process, right=1.5cm of iter_start] {Hitung Statistik\\(p50, p95)};
-    \node (end) [start, below=of calc] {Selesai};
-
-    \draw [arrow] (start) -- (init);
-    \draw [arrow] (init) -- (warmup);
-    \draw [arrow] (warmup) -- (iter_start);
-    
-    \draw [arrow] (iter_start) -- node[right] {Ya} (pre);
-    \draw [arrow] (pre) -- (infer);
-    \draw [arrow] (infer) -- (post);
-    \draw [arrow] (post) -- (record);
-    
-    \draw [arrow] (record.west) -- ++(-0.5,0) |- (iter_start.west);
-    
-    \draw [arrow] (iter_start) -- node[above] {Tidak} (calc);
-    \draw [arrow] (calc) -- (end);
-
-    \end{tikzpicture}
-    \caption{Diagram Alur Prosedur \textit{Benchmarking} Latensi Model}
-    \label{fig:benchmark_flowchart}
-\end{figure}
-
-Data latensi yang dikumpulkan dari fase pengujian kemudian dianalisis secara statistik menggunakan metrik persentil ke-50 (p50) dan persentil ke-95 (p95). Misalkan $T = \{t_1, t_2, \dots, t_n\}$ adalah himpunan waktu latensi total yang telah diurutkan secara menaik, definisi dan relevansi praktis dari kedua metrik tersebut adalah:
-
-\begin{enumerate}[nosep]
-    \item p50 (Median): Merepresentasikan nilai tengah dari distribusi latensi. Metrik ini menggambarkan kecepatan respons tipikal yang akan dialami oleh mayoritas pengguna dalam penggunaan normal.
-    \begin{equation}
-        p50 = \begin{cases} t_{\frac{n+1}{2}} & \text{jika } n \text{ ganjil} \\ \frac{1}{2} (t_{\frac{n}{2}} + t_{\frac{n}{2}+1}) & \text{jika } n \text{ genap} \end{cases}
-    \end{equation}
-
-    \item p95 (Persentil ke-95): Merepresentasikan ambang batas waktu di mana 95\% dari total sampel inferensi lebih cepat dari nilai tersebut. Metrik ini digunakan untuk mengukur performa dalam skenario terburuk (\textit{tail latency}), memastikan sistem tetap responsif bahkan saat memproses citra yang kompleks atau dalam kondisi beban tinggi.
-    \begin{equation}
-        p95 = t_{\lceil 0.95 \cdot n \rceil}
-    \end{equation}
-\end{enumerate}
-
-Setelah tahap evaluasi, dilakukan \textit{benchmarking} dengan menganalisis hubungan antara mAP dan latensi melalui grafik \textit{Pareto frontier}. Grafik \textit{Pareto frontier} digunakan untuk mengidentifikasi sekumpulan model yang memberikan kombinasi performa terbaik tanpa ada model lain yang lebih unggul di kedua aspek secara bersamaan \parencite{shakyaSmallObjectDetectionEdge2026}. Visualisasi contoh grafik \textit{Pareto frontier} disajikan pada Gambar \ref{fig:pareto_curve}. Analisis ini bertujuan untuk mengidentifikasi varian model yang menawarkan latensi paling minimal dengan tetap mempertahankan performa deteksi yang optimal.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\textwidth]{bab3/contohparetofrontier.png}
-    \caption{Contoh Grafik \textit{Pareto Frontier} mAP vs Latensi \parencite{shakyaSmallObjectDetectionEdge2026}}
-    \label{fig:pareto_curve}
-\end{figure}
-
 \subsubsection{Alat Deteksi Open-Vocabulary}
-Alat deteksi \textit{open-vocabulary} menggunakan model OWLv2 yang dikembangkan oleh Google \parencite{mindererScalingOpenVocabularyObject2024}. Sistem menggunakan varian model \texttt{google/\allowbreak owlv2-base-\allowbreak patch16} yang telah dikonversi ke format ONNX. Model ini mengintegrasikan \textit{vision transformer} (ViT) dengan \textit{text encoder} untuk melakukan deteksi objek berdasarkan deskripsi tekstual secara \textit{zero-shot}. Gambar \ref{fig:arsitektur_owlv2} menyajikan visualisasi arsitektur dari model OWLv2.
+Alat deteksi \textit{open-vocabulary} menggunakan model OWLv2 \parencite{huggingfaceOWLv2} yang dikembangkan oleh Google \parencite{mindererScalingOpenVocabularyObject2024}. Sistem menggunakan varian model \textit{google/\allowbreak owlv2-base-\allowbreak patch16} yang telah dikonversi ke format ONNX. Model ini mengintegrasikan \textit{vision transformer} (ViT) dengan \textit{text encoder} untuk melakukan deteksi objek berdasarkan deskripsi tekstual secara \textit{zero-shot}. Gambar \ref{fig:arsitektur_owlv2} menyajikan visualisasi arsitektur dari model OWLv2.
 
 \begin{figure}[H]
     \centering
@@ -322,7 +234,7 @@ Alat deteksi \textit{open-vocabulary} menggunakan model OWLv2 yang dikembangkan 
 \end{figure}
 
 \subsection{Modul Pencarian Gambar-Teks Penyakit}
-Modul pencarian gambar-teks penyakit dirancang sebagai komponen utama sistem untuk mengidentifikasi gejala penyakit tanaman melalui pendekatan pengambilan informasi multimodal. Implementasi modul ini menggunakan teknologi Qdrant yang mendukung penyimpanan dan pencarian vektor bernama jamak (\textit{multi-named vectors}) secara efisien. Melalui fitur ini, dataset yang berisi pasangan gambar dan teks dapat disematkan (\textit{embedded}) ke dalam satu koleksi Qdrant, di mana satu poin data menampung dua vektor sekaligus, yaitu vektor gambar dan vektor teks. Representasi fitur diekstraksi menggunakan model \textit{foundation} SCOLD yang dikembangkan oleh \textcite{quocVisionLanguageFoundationModel2025} dengan arsitektur RoBERTa dari \textcite{liuRoBERTaRobustlyOptimized2019} sebagai \textit{encoder} teks dan arsitektur Swin-T dari \textcite{liuSwinTransformerHierarchical2021} sebagai \textit{encoder} gambar. Rincian lebih lanjut mengenai skema ini akan dibahas pada subbab berikutnya. Alur kerja dari modul pencarian gambar-teks divisualisasikan pada Gambar \ref{fig:image_text_search_workflow}.
+Modul pencarian gambar-teks penyakit dirancang sebagai komponen utama sistem untuk mengidentifikasi gejala penyakit tanaman melalui pendekatan pengambilan informasi multimodal. Implementasi modul ini menggunakan teknologi Qdrant yang mendukung penyimpanan dan pencarian vektor bernama jamak (\textit{multi-named vectors}) secara efisien. Melalui fitur ini, dataset yang berisi pasangan gambar dan teks dapat disematkan (\textit{embedded}) ke dalam satu koleksi Qdrant, di mana satu poin data menampung dua vektor sekaligus, yaitu vektor gambar dan vektor teks. Representasi fitur diekstraksi menggunakan model \textit{foundation} SCOLD \parencite{huggingfaceSCOLD} yang dikembangkan oleh \textcite{quocVisionLanguageFoundationModel2025} dengan arsitektur RoBERTa dari \textcite{liuRoBERTaRobustlyOptimized2019} sebagai \textit{encoder} teks dan arsitektur Swin-T dari \textcite{liuSwinTransformerHierarchical2021} sebagai \textit{encoder} gambar. Rincian lebih lanjut mengenai skema ini akan dibahas pada subbab berikutnya. Alur kerja dari modul pencarian gambar-teks divisualisasikan pada Gambar \ref{fig:image_text_search_workflow}.
 
 \begin{figure}[H]
     \centering
@@ -332,13 +244,13 @@ Modul pencarian gambar-teks penyakit dirancang sebagai komponen utama sistem unt
 \end{figure}
 
 
-\subsubsection{Persiapan Data}
+\subsubsection{Persiapan Data Indeks}
 Dataset PlantWild yang disusun oleh \textcite{weiBenchmarkingInthewildMultimodal2024} digunakan sebagai basis indeks pencarian pada modul ini. Dataset ini mencakup total 18.542 citra yang terdistribusi ke dalam 89 kelas kondisi kesehatan dan penyakit pada 13 spesies tanaman utama. Citra dalam dataset ini mencakup berbagai organ tanaman, termasuk daun, buah, dan batang. Klasifikasi tersebut terdiri dari 56 kelas penyakit dan 33 kelas kondisi sehat. Dalam penelitian ini, dilakukan pengambilan sampel secara acak sebanyak 3 citra dari setiap kelas untuk kebutuhan pengujian, sehingga diperoleh total 267 citra uji. Sebanyak 18.275 citra sisanya kemudian digunakan untuk diindeks ke dalam basis data vektor. Selain data citra, setiap kelas dalam dataset ini juga dilengkapi dengan 10 \textit{caption} yang mendeskripsikan karakteristik visual dari kelas tersebut. Gambar \ref{fig:plantwild_distribution} menyajikan distribusi kelas pada dataset PlantWild.
  
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{bab3/distribusiplantwild.png}
-    \caption{Distribusi Kelas pada Dataset PlantWild dari \protect\textcite{weiBenchmarkingInthewildMultimodal2024}}
+    \caption[Distribusi Kelas pada Dataset PlantWild]{Distribusi Kelas pada Dataset PlantWild dari \protect\textcite{weiBenchmarkingInthewildMultimodal2024}}
     \label{fig:plantwild_distribution}
 \end{figure}
 
@@ -358,19 +270,19 @@ Tabel \ref{tab:qdrant_schema} menyajikan rincian skema \textit{Points} dan struk
     \begin{tabular}{|l|l|l|p{7cm}|}
     \hline
     \multicolumn{1}{|c|}{\textbf{Komponen}} & \multicolumn{1}{c|}{\textbf{Kunci}} & \multicolumn{1}{c|}{\textbf{Tipe}} & \multicolumn{1}{c|}{\textbf{Deskripsi}} \\ \hline
-    \multirow{2}{*}{\textbf{Vektor}} & \texttt{text} & 512 & Representasi semantik deskripsi gejala (RoBERTa). \\ \cline{2-4} 
-     & \texttt{image} & 512 & Representasi fitur visual citra tanaman (Swin-T/SCOLD). \\ \hline
-    \multirow{6}{*}{\textbf{Payload}} & \texttt{plant\_name} & String & Nama spesies tanaman. Diindeks secara \textit{full-text} untuk filtrasi. \\ \cline{2-4} 
-     & \texttt{label} & String & Nama spesifik penyakit. Diindeks secara \textit{full-text}. \\ \cline{2-4} 
-     & \texttt{caption} & String & Deskripsi tekstual lengkap mengenai gejala. \\ \cline{2-4} 
-     & \texttt{image\_url} & String & Tautan publik citra di Cloudflare R2. \\ \cline{2-4} 
-     & \texttt{source\_id} & Integer & ID referensi internal. \\ \cline{2-4} 
-     & \texttt{filename} & String & Nama fail asli citra. \\ \hline
+    \multirow{2}{*}{\textbf{Vektor}} & \textit{text} & 512 & Representasi semantik deskripsi gejala (RoBERTa). \\ \cline{2-4} 
+     & \textit{image} & 512 & Representasi fitur visual citra tanaman (Swin-T/SCOLD). \\ \hline
+    \multirow{6}{*}{\textbf{Payload}} & \textit{plant\_name} & String & Nama spesies tanaman. Diindeks secara \textit{full-text} untuk filtrasi. \\ \cline{2-4} 
+     & \textit{label} & String & Nama spesifik penyakit. Diindeks secara \textit{full-text}. \\ \cline{2-4} 
+     & \textit{caption} & String & Deskripsi tekstual lengkap mengenai gejala. \\ \cline{2-4} 
+     & \textit{image\_url} & String & Tautan publik citra di Cloudflare R2. \\ \cline{2-4} 
+     & \textit{source\_id} & Integer & ID referensi internal. \\ \cline{2-4} 
+     & \textit{filename} & String & Nama fail asli citra. \\ \hline
     \end{tabular}%
     }
 \end{table}
 
-Fitur penting dalam implementasi ini adalah penerapan indeks teks penuh (\textit{full-text index}) yang disediakan oleh Qdrant pada kolom \textit{payload} \texttt{plant\_name} dan \texttt{label}. Berbeda dengan pencocokan kata kunci eksak (\textit{keyword match}), indeks teks penuh memungkinkan agen untuk melakukan penyaringan (\textit{filtering}) yang lebih fleksibel, seperti pencocokan berdasarkan token kata (\textit{token-based matching}) dan ketidakpekaan terhadap huruf besar-kecil (\textit{case-insensitive}). Fitur ini secara signifikan meningkatkan efisiensi pencarian agen dengan membatasi ruang pencarian vektor hanya pada subset data yang relevan dengan konteks tanaman yang sedang dianalisis. Sebagai ilustrasi, ketika agen mendeteksi bahwa tanaman yang dianalisis adalah tomat, agen dapat menerapkan filter pada \texttt{plant\_name} untuk hanya mencari di antara data penyakit tomat, sehingga hasil yang diperoleh lebih akurat dan relevan. Visualisasi mekanisme ini disajikan pada Gambar \ref{fig:payload_filtering}.
+Fitur penting dalam implementasi ini adalah penerapan indeks teks penuh (\textit{full-text index}) yang disediakan oleh Qdrant pada kolom \textit{payload} \textit{plant\_name} dan \textit{label}. Berbeda dengan pencocokan kata kunci eksak (\textit{keyword match}), indeks teks penuh memungkinkan agen untuk melakukan penyaringan (\textit{filtering}) yang lebih fleksibel, seperti pencocokan berdasarkan token kata (\textit{token-based matching}) dan ketidakpekaan terhadap huruf besar-kecil (\textit{case-insensitive}). Fitur ini secara signifikan meningkatkan efisiensi pencarian agen dengan membatasi ruang pencarian vektor hanya pada subset data yang relevan dengan konteks tanaman yang sedang dianalisis. Sebagai ilustrasi, ketika agen mendeteksi bahwa tanaman yang dianalisis adalah tomat, agen dapat menerapkan filter pada \textit{plant\_name} untuk hanya mencari di antara data penyakit tomat, sehingga hasil yang diperoleh lebih akurat dan relevan. Visualisasi mekanisme ini disajikan pada Gambar \ref{fig:payload_filtering}.
 
 %TODO: ini gambar masih placeholder, sesuain konteksnya ke tanaman!
 \begin{figure}[H]
@@ -422,16 +334,16 @@ Penjelasan rinci mengenai mekanisme kerja dari masing-masing strategi pencarian 
 
 \begin{enumerate}[nosep]
     \item Text-to-Text (Pencarian Semantik Teks) \\
-    Mode ini digunakan ketika pengguna memberikan deskripsi gejala berupa teks. Input diproses oleh \textit{tokenizer} dan \textit{text encoder} RoBERTa untuk menghasilkan vektor teks. Vektor ini kemudian dicocokkan dengan koleksi vektor teks (\texttt{text}) dalam indeks Qdrant yang merepresentasikan \textit{caption} penyakit. Strategi ini efektif untuk menemukan diagnosis berdasarkan deskripsi linguistik gejala.
+    Mode ini digunakan ketika pengguna memberikan deskripsi gejala berupa teks. Input diproses oleh \textit{tokenizer} dan \textit{text encoder} RoBERTa untuk menghasilkan vektor teks. Vektor ini kemudian dicocokkan dengan koleksi vektor teks (\textit{text}) dalam indeks Qdrant yang merepresentasikan \textit{caption} penyakit. Strategi ini efektif untuk menemukan diagnosis berdasarkan deskripsi linguistik gejala.
 
     \item Text-to-Image (Pencarian Lintas Modal Teks-ke-Citra) \\
-    Mode ini memungkinkan pencarian citra referensi penyakit hanya dengan menggunakan deskripsi teks. Vektor teks hasil enkripsi digunakan untuk mencari tetangga terdekat pada ruang vektor citra (\texttt{image}). Kemampuan ini dimungkinkan karena model SCOLD telah dilatih untuk meminimalkan jarak antara pasangan teks dan citra yang relevan dalam ruang vektor (\textit{embedding space}).
+    Mode ini memungkinkan pencarian citra referensi penyakit hanya dengan menggunakan deskripsi teks. Vektor teks hasil enkripsi digunakan untuk mencari tetangga terdekat pada ruang vektor citra (\textit{image}). Kemampuan ini dimungkinkan karena model SCOLD telah dilatih untuk meminimalkan jarak antara pasangan teks dan citra yang relevan dalam ruang vektor (\textit{embedding space}).
 
     \item Image-to-Image (Pencarian Kemiripan Visual) \\
-    Mode ini adalah metode standar untuk identifikasi berbasis citra. Citra masukan dari pengguna (baik citra utuh maupun hasil potongan/crop deteksi objek) diproses oleh \textit{image encoder} (Swin-Transformer basis SCOLD) menjadi vektor citra. Vektor ini kemudian dibandingkan dengan jutaan vektor citra (\texttt{image}) dalam basis data untuk menemukan penyakit dengan karakteristik visual paling serupa.
+    Mode ini adalah metode standar untuk identifikasi berbasis citra. Citra masukan dari pengguna (baik citra utuh maupun hasil potongan/crop deteksi objek) diproses oleh \textit{image encoder} (Swin-Transformer basis SCOLD) menjadi vektor citra. Vektor ini kemudian dibandingkan dengan jutaan vektor citra (\textit{image}) dalam basis data untuk menemukan penyakit dengan karakteristik visual paling serupa.
 
     \item Image-to-Text (Pencarian Lintas Modal Citra-ke-Teks) \\
-    Mode ini membalikkan pendekatan lintas modal, di mana vektor citra masukan digunakan untuk mencari kecocokan pada ruang vektor teks (\texttt{text}). Strategi ini berguna untuk mendapatkan deskripsi tekstual atau label penyakit yang paling relevan secara langsung dari fitur visual, tanpa harus bergantung pada metadata citra referensi.
+    Mode ini membalikkan pendekatan lintas modal, di mana vektor citra masukan digunakan untuk mencari kecocokan pada ruang vektor teks (\textit{text}). Strategi ini berguna untuk mendapatkan deskripsi tekstual atau label penyakit yang paling relevan secara langsung dari fitur visual, tanpa harus bergantung pada metadata citra referensi.
 \end{enumerate}
 
 
@@ -448,18 +360,18 @@ Basis data pengetahuan internal dibangun dari korpus dokumen terkurasi yang berf
 \end{figure}
 
 \subsubsection{Alat Pencarian Basis Data Pengetahuan}
-Implementasi alat pencarian basis data pengetahuan diawali dengan pemilihan komponen model yang optimal melalui proses \textit{benchmarking}. Berdasarkan studi literatur, terdapat perbedaan performa antara berbagai model \textit{embedding} yang tersedia saat ini. Mengacu pada \textit{Massive Text Embedding Benchmark} (MTEB) oleh \textcite{muennighoffMTEBMassiveText2023}, model \texttt{gemini-embedding-001} dari Google DeepMind tercatat sebagai model proprietari dengan peringkat teratas, mengungguli model \texttt{text-embedding-3-large} dari OpenAI yang berada di peringkat kelima. Peringkat ini pada MTEB ditampilkan pada Gambar \ref{fig:mteb_benchmark}.
+Implementasi alat pencarian basis data pengetahuan diawali dengan pemilihan komponen model yang optimal melalui proses \textit{benchmarking}. Berdasarkan studi literatur, terdapat perbedaan performa antara berbagai model \textit{embedding} yang tersedia saat ini. Mengacu pada \textit{Massive Text Embedding Benchmark} (MTEB) oleh \textcite{muennighoffMTEBMassiveText2023}, model \textit{gemini-embedding-001} dari Google DeepMind tercatat sebagai model proprietari dengan peringkat teratas, mengungguli model \textit{text-embedding-3-large} dari OpenAI yang berada di peringkat kelima. Peringkat ini pada MTEB ditampilkan pada Gambar \ref{fig:mteb_benchmark}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{bab3/mtebbenchmark.png}
-    \caption{Peringkat \texttt{gemini-embedding-001} dan \texttt{text-embedding-3-large} pada MTEB oleh \textcite{muennighoffMTEBMassiveText2023}}
+    \caption[Peringkat \textit{gemini-embedding-001} dan \textit{text-embedding-3-large} pada MTEB]{Peringkat \textit{gemini-embedding-001} dan \textit{text-embedding-3-large} pada MTEB oleh \textcite{muennighoffMTEBMassiveText2023}}
     \label{fig:mteb_benchmark}
 \end{figure}
 
-Akan tetapi, hasil yang berbeda ditunjukkan pada \textit{Semantic Alignment \& Generalization Evaluation} (SAGE) oleh \textcite{goelSAGERealisticBenchmark2025}. Pada tolok ukur ini, model \texttt{text-embedding-3-large} menempati posisi terbaik dengan skor keseluruhan SAGE sebesar 0,524, sedangkan \texttt{gemini-embedding-001} berada di peringkat ketiga dengan skor 0,504.
+Akan tetapi, hasil yang berbeda ditunjukkan pada \textit{Semantic Alignment \& Generalization Evaluation} (SAGE) oleh \textcite{goelSAGERealisticBenchmark2025}. Pada tolok ukur ini, model \textit{text-embedding-3-large} menempati posisi terbaik dengan skor keseluruhan SAGE sebesar 0,524, sedangkan \textit{gemini-embedding-001} berada di peringkat ketiga dengan skor 0,504.
 
-Mengingat adanya perbedaan hasil evaluasi tersebut, dilakukan \textit{benchmarking} internal menggunakan korpus data yang akan digunakan pada sistem untuk menentukan konfigurasi model yang paling sesuai dengan karakteristik data penyakit tanaman yang digunakan. Pengujian difokuskan pada konfigurasi \textit{hybrid search} yang menggabungkan pencarian vektor padat (\textit{dense vector}) dan vektor jarang (\textit{sparse vector}). Untuk komponen vektor jarang, digunakan dua pendekatan populer yaitu BM25 dari \textcite{robertsonProbabilisticRelevanceFramework2009} melalui Qdrant dan SPLADE dari \textcite{formalSPLADESparseLexical2021} melalui FastEmbed. Kombinasi pengujian mencakup empat variasi konfigurasi \textit{hybrid search}, yaitu (1) \texttt{text-embedding-3-large} dengan BM25, (2) \texttt{text-embedding-3-large} dengan SPLADE, (3) \texttt{gemini-embedding-001} dengan BM25, dan (4) \texttt{gemini-embedding-001} dengan SPLADE. Konfigurasi \textit{hybrid search} terbaik selanjutnya akan diuji lebih lanjut untuk mengevaluasi efektivitas komponen \textit{reranker}. Pengujian ini bertujuan untuk membandingkan kinerja antara model \textit{reranking} berbasis \textit{cross-encoder} dan \textit{late interaction}. Sebagai representasi model \textit{cross-encoder}, dipilih model \texttt{rerank-2.5} dari Voyage AI. Sementara itu, untuk pendekatan \textit{late interaction}, digunakan model \texttt{jina-colbert-v2} dari Jina AI \parencite{jhaJinaColBERTv2GeneralPurposeMultilingual2024} yang diimplementasikan melalui pustaka FastEmbed. Perbandingan ini dilakukan untuk mendapatkan konfigurasi \textit{Retrieval-Augmented Generation} (RAG) yang paling optimal sebelum diimplementasikan ke sistem agentik. Alur pengujian komponen pencarian ini divisualisasikan pada Gambar \ref{fig:alur_pengujian_retrieval}.
+Mengingat adanya perbedaan hasil evaluasi tersebut, dilakukan \textit{benchmarking} internal menggunakan korpus data yang akan digunakan pada sistem untuk menentukan konfigurasi model yang paling sesuai dengan karakteristik data penyakit tanaman yang digunakan. Pengujian difokuskan pada konfigurasi \textit{hybrid search} yang menggabungkan pencarian vektor padat (\textit{dense vector}) dan vektor jarang (\textit{sparse vector}). Untuk komponen vektor jarang, digunakan dua pendekatan populer yaitu BM25 dari \textcite{robertsonProbabilisticRelevanceFramework2009} melalui Qdrant dan SPLADE dari \textcite{formalSPLADESparseLexical2021} melalui FastEmbed. Kombinasi pengujian mencakup empat variasi konfigurasi \textit{hybrid search}, yaitu (1) \textit{text-embedding-3-large} dengan BM25, (2) \textit{text-embedding-3-large} dengan SPLADE, (3) \textit{gemini-embedding-001} dengan BM25, dan (4) \textit{gemini-embedding-001} dengan SPLADE. Konfigurasi \textit{hybrid search} terbaik selanjutnya akan diuji lebih lanjut untuk mengevaluasi efektivitas komponen \textit{reranker}. Pengujian ini bertujuan untuk membandingkan kinerja antara model \textit{reranking} berbasis \textit{cross-encoder} dan \textit{late interaction}. Sebagai representasi model \textit{cross-encoder}, dipilih model \textit{rerank-2.5} dari Voyage AI. Sementara itu, untuk pendekatan \textit{late interaction}, digunakan model \textit{jina-colbert-v2} dari Jina AI \parencite{jhaJinaColBERTv2GeneralPurposeMultilingual2024} yang diimplementasikan melalui pustaka FastEmbed. Perbandingan ini dilakukan untuk mendapatkan konfigurasi \textit{Retrieval-Augmented Generation} (RAG) yang paling optimal sebelum diimplementasikan ke sistem agentik. Alur pengujian komponen pencarian ini divisualisasikan pada Gambar \ref{fig:alur_pengujian_retrieval}.
 
 \begin{figure}[H]
     \centering
@@ -468,22 +380,24 @@ Mengingat adanya perbedaan hasil evaluasi tersebut, dilakukan \textit{benchmarki
     \label{fig:alur_pengujian_retrieval}
 \end{figure}
 
-\paragraph{Persiapan Data}
-Persiapan data untuk basis pengetahuan dilakukan melalui serangkaian tahapan mulai dari pengumpulan data mentah melalui \textit{web scraping}, penyusunan korpus, hingga pembangkitan dataset evaluasi sintetis. Alur kerja lengkap persiapan data ini divisualisasikan pada Gambar \ref{fig:data_preparation_workflow}.
+\paragraph{Persiapan Data Korpus}
+Persiapan data korpus untuk basis pengetahuan dilakukan melalui serangkaian tahapan mulai dari pengumpulan data mentah melalui \textit{web scraping}, penyusunan korpus, hingga pembangkitan dataset evaluasi sintetis. Alur kerja lengkap persiapan data ini divisualisasikan pada Gambar \ref{fig:data_preparation_workflow}.
 
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
-        node distance=1.0cm,
+        node distance=0.5cm,
         font=\scriptsize,
+        start/.style={circle, draw, fill=blue!10, minimum size=1.2cm, align=center},
         process/.style={rectangle, draw, rounded corners, fill=blue!5, align=center, minimum width=3cm, minimum height=0.8cm},
-        data/.style={cylinder, shape border rotate=90, draw, aspect=0.25, fill=yellow!10, align=center, minimum width=2cm, minimum height=1cm},
+        data/.style={cylinder, shape border rotate=90, draw, aspect=0.25, fill=yellow!10, align=center, minimum width=2cm, minimum height=0.8cm},
         model/.style={ellipse, draw, dashed, fill=green!5, align=center, minimum width=2cm},
         arrow/.style={-stealth, thick}
     ]
 
     % Nodes
-    \node (sources) [process, fill=white] {Sumber Data\\(PlantVillage \& Gardenology)};
+    \node (start) [start] {Mulai};
+    \node (sources) [process, fill=white, below=of start] {Sumber Data\\(PlantVillage \& Gardenology)};
     \node (crawl) [process, below=of sources] {Crawling URL\\(Playwright/Crawl4AI)};
     \node (scrape) [process, below=of crawl] {Scraping \& Ekstraksi\\(ScrapeGraphAI)};
     \node (llm_scrape) [model, right=0.5cm of scrape] {LLM:\\Gemini 2.5 Flash};
@@ -500,7 +414,10 @@ Persiapan data untuk basis pengetahuan dilakukan melalui serangkaian tahapan mul
 
     \node (dataset) [data, below=of gen_qa, fill=green!20] {Dataset QA\\(600 Sampel)};
 
+    \node (end) [start, below=of dataset] {Selesai};
+
     % Arrows
+    \draw [arrow] (start) -- (sources);
     \draw [arrow] (sources) -- (crawl);
     \draw [arrow] (crawl) -- (scrape);
     \draw [arrow] (scrape) -- (json);
@@ -508,6 +425,8 @@ Persiapan data untuk basis pengetahuan dilakukan melalui serangkaian tahapan mul
     \draw [arrow] (chunk) -- (corpus);
     \draw [arrow] (corpus) -- (gen_qa);
     \draw [arrow] (gen_qa) -- (dataset);
+
+    \draw [arrow] (dataset) -- (end);
 
     \draw [arrow, dashed] (llm_scrape) -- (scrape);
     \draw [arrow, dashed] (embed) -- (chunk);
@@ -521,6 +440,25 @@ Persiapan data untuk basis pengetahuan dilakukan melalui serangkaian tahapan mul
 %TODO: ini mungkin perlu sitasi ajh webnya
 Data mentah dikumpulkan dari dua sumber utama, yaitu PlantVillage (plantvillage.psu.edu) dan Gardenology (gardenology.org). PlantVillage dipilih karena reputasinya sebagai sumber informasi penyakit tanaman yang kredibel yang dikelola oleh Penn State University, sedangkan Gardenology dipilih untuk melengkapi informasi mengenai aspek budidaya dan propagasi tanaman yang kurang mendalam pada PlantVillage.
 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bab3/plantvillageweb.png}
+        \caption{}
+        \label{fig:plantvillage_web}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{bab3/gardenologyweb.png}
+        \caption{}
+        \label{fig:gardenology_web}
+    \end{subfigure}
+    \caption{Tampilan antarmuka situs sumber data: (a) PlantVillage dan (b) Gardenology}
+    \label{fig:sumber_data_web}
+\end{figure}
+
 Proses pengumpulan data dilakukan menggunakan teknik \textit{web scraping} hibrida yang menggabungkan automasi peramban (\textit{browser automation}) dan ekstraksi berbasis LLM. Untuk penemuan tautan (\textit{crawling}), digunakan pustaka Playwright dari Python. Selanjutnya, ekstraksi konten dilakukan menggunakan pustaka ScrapeGraphAI. Pustaka ini memanfaatkan LLM untuk mengurai struktur HTML yang tidak beraturan menjadi format JSON yang terstruktur sesuai skema yang didefinisikan. Model Gemini 2.5 Flash dengan temperatur 0 dipilih sebagai otak ekstraksi karena memiliki jendela konteks (\textit{context window}) yang besar dan latensi rendah. Tabel \ref{tab:scraping_schema} menyajikan skema data yang digunakan untuk ekstraksi. Dari proses ini, berhasil dikumpulkan 222 entri data yang mencakup sekitar 200 spesies tanaman unik.
 
 \begin{table}[H]
@@ -531,14 +469,21 @@ Proses pengumpulan data dilakukan menggunakan teknik \textit{web scraping} hibri
     \begin{tabular}{|l|l|p{7cm}|}
     \hline
     \textbf{Atribut} & \textbf{Tipe Data} & \textbf{Deskripsi} \\ \hline
-    \texttt{plant} & String & Nama umum tanaman. \\ \hline
-    \texttt{description} & String & Deskripsi umum karakteristik tanaman. \\ \hline
-    \texttt{propagation} & String & Informasi budidaya tanaman. \\ \hline
-    \texttt{pests\_and\_diseases} & List/String & Daftar penyakit beserta gejala, penyebab, dan manajemennya. \\ \hline
+    \textit{plant} & String & Nama umum tanaman. \\ \hline
+    \textit{description} & String & Deskripsi umum karakteristik tanaman. \\ \hline
+    \textit{propagation} & String & Informasi budidaya tanaman. \\ \hline
+    \textit{pests\_and\_diseases} & List/String & Daftar penyakit beserta gejala, penyebab, dan manajemennya. \\ \hline
     \end{tabular}
 \end{table}
 
-Data JSON hasil \textit{scraping} kemudian diproses menjadi korpus dokumen menggunakan kerangka kerja LlamaIndex. Informasi dipisahkan menjadi dua kategori dokumen utama, yaitu (1) dokumen budidaya/propagasi dan (2) dokumen penyakit. Untuk menangani dokumen teks yang panjang, diterapkan teknik pemotongan semantik (\textit{semantic chunking}) menggunakan \texttt{SemanticSplitterNodeParser} dari LlamaIndex dengan model \textit{embedding} \texttt{gemini-embedding-001}. Pemotongan semantik bekerja dengan menghitung jarak kosinus (\textit{cosine distance}) antar representasi vektor dari kalimat-kalimat yang berurutan. Dalam implementasinya, ditetapkan parameter \textit{breakpoint percentile threshold} sebesar 95. Nilai ini menginstruksikan algoritma untuk menentukan ambang batas pemotongan berdasarkan persentil ke-95 dari distribusi jarak semantik dalam dokumen. Dengan kata lain, pemisahan dokumen (\textit{splitting}) hanya dilakukan pada titik-titik yang memiliki tingkat perbedaan semantik tertinggi (top 5\%), yang mengindikasikan adanya pergantian topik atau konteks yang signifikan. Pendekatan ini memastikan bahwa setiap potongan dokumen (\textit{chunk}) memiliki koherensi tematik yang utuh dan tidak terpotong di tengah penjelasan yang relevan. Proses ini menghasilkan total 2.469 dokumen yang siap diindeks.
+Data JSON hasil \textit{scraping} kemudian diproses menjadi korpus dokumen menggunakan kerangka kerja LlamaIndex. Informasi dipisahkan menjadi dua kategori dokumen utama, yaitu (1) dokumen budidaya/propagasi dan (2) dokumen penyakit. Untuk menangani dokumen teks yang panjang, diterapkan teknik pemotongan semantik (\textit{semantic chunking}) menggunakan \textit{SemanticSplitterNodeParser} dari LlamaIndex dengan model \textit{embedding} \textit{gemini-embedding-001}. Pemotongan semantik bekerja dengan menghitung jarak kosinus (\textit{cosine distance}) antar representasi vektor dari kalimat-kalimat yang berurutan. Dalam implementasinya, ditetapkan parameter \textit{breakpoint percentile threshold} sebesar 95. Nilai ini menginstruksikan algoritma untuk menentukan ambang batas pemotongan berdasarkan persentil ke-95 dari distribusi jarak semantik dalam dokumen. Dengan kata lain, pemisahan dokumen (\textit{splitting}) hanya dilakukan pada titik-titik yang memiliki tingkat perbedaan semantik tertinggi (top 5\%), yang mengindikasikan adanya pergantian topik atau konteks yang signifikan. Pendekatan ini memastikan bahwa setiap potongan dokumen (\textit{chunk}) memiliki koherensi tematik yang utuh dan tidak terpotong di tengah penjelasan yang relevan. Proses ini menghasilkan total 2.469 potongan dokumen (\textit{chunks}) yang siap diindeks. Contoh sampel dokumen hasil pemotongan semantik dapat dilihat pada Gambar \ref{fig:sampel_korpus}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{bab3/sampelkorpus.png}
+    \caption{Sampel korpus dokumen hasil pemotongan semantik}
+    \label{fig:sampel_korpus}
+\end{figure}
 
 Untuk mengevaluasi performa pada \textit{benchmarking}, dibuat dataset \textit{Question-Answering} (QA) sintetis sebanyak 600 sampel dari korpus yang telah disusun. Pembangkitan dilakukan menggunakan Gemini 2.5 Flash dengan temperatur 0 dan dalam bahasa Inggris. Pembangkitan dataset ini menggunakan dan mengadopsi metodologi yang disediakan AutoRAG dari \textcite{kimAutoRAGAutomatedFramework2024}. Dataset mencakup tiga jenis pertanyaan dengan tingkat kompleksitas berbeda, sebagaimana dirangkum dalam Tabel \ref{tab:qa_types}.
 
@@ -559,9 +504,9 @@ Untuk mengevaluasi performa pada \textit{benchmarking}, dibuat dataset \textit{Q
 \end{table}
 
 \paragraph{Indexing}
-Proses pengindeksan dilakukan dengan memanfaatkan fitur vektor bernama jamak (\textit{multi-named vectors}) pada Qdrant. Fitur ini memungkinkan penyimpanan beberapa representasi vektor sekaligus dalam satu entitas Poin (\textit{Point}) tunggal. Pendekatan ini diterapkan untuk memfasilitasi evaluasi strategi pencarian yang komprehensif dengan menyatukan seluruh representasi vektor dari berbagai model dalam satu koleksi terpadu. Setiap dokumen dalam korpus diubah menjadi Poin yang memiliki empat komponen vektor, yaitu dua vektor padat (\textit{dense vectors}) dan dua vektor jarang (\textit{sparse vectors}). Vektor padat dihasilkan oleh model \texttt{gemini-embedding-001} dan \texttt{text-embedding-3-large}, masing-masing dengan dimensi 3.072. Sementara itu, vektor jarang dihasilkan menggunakan model SPLADE++ dan algoritma BM25 yang terintegrasi secara internal di Qdrant.
+Proses pengindeksan dilakukan dengan memanfaatkan fitur vektor bernama jamak (\textit{multi-named vectors}) pada Qdrant. Fitur ini memungkinkan penyimpanan beberapa representasi vektor sekaligus dalam satu entitas Poin (\textit{Point}) tunggal. Pendekatan ini diterapkan untuk memfasilitasi evaluasi strategi pencarian yang komprehensif dengan menyatukan seluruh representasi vektor dari berbagai model dalam satu koleksi terpadu. Setiap dokumen dalam korpus diubah menjadi Poin yang memiliki empat komponen vektor, yaitu dua vektor padat (\textit{dense vectors}) dan dua vektor jarang (\textit{sparse vectors}). Vektor padat dihasilkan oleh model \textit{gemini-embedding-001} dan \textit{text-embedding-3-large}, masing-masing dengan dimensi 3.072. Sementara itu, vektor jarang dihasilkan menggunakan model SPLADE++ dan algoritma BM25 yang terintegrasi secara internal di Qdrant.
 
-Selain representasi vektor, setiap Poin juga menyimpan \textit{payload} yang berisi konten teks dokumen dan metadata terkait. Untuk mendukung efisiensi pengambilan informasi oleh agen, diterapkan indeks teks penuh (\textit{full-text index}) pada atribut metadata nama tanaman (\texttt{metadata.plant}) dan nama penyakit (\texttt{metadata.disease}). Penggunaan indeks teks penuh memungkinkan agen untuk melakukan penyaringan (\textit{filtering}) berbasis token kata terhadap ruang pencarian, sehingga hasil yang diperoleh lebih relevan dengan konteks tanaman atau penyakit yang sedang dianalisis. Skema lengkap representasi data pada indeks basis pengetahuan disajikan pada Tabel \ref{tab:knowledge_base_schema}.
+Selain representasi vektor, setiap Poin juga menyimpan \textit{payload} yang berisi konten teks dokumen dan metadata terkait. Untuk mendukung efisiensi pengambilan informasi oleh agen, diterapkan indeks teks penuh (\textit{full-text index}) pada atribut metadata nama tanaman (\textit{metadata.plant}) dan nama penyakit (\textit{metadata.disease}). Penggunaan indeks teks penuh memungkinkan agen untuk melakukan penyaringan (\textit{filtering}) berbasis token kata terhadap ruang pencarian, sehingga hasil yang diperoleh lebih relevan dengan konteks tanaman atau penyakit yang sedang dianalisis. Skema lengkap representasi data pada indeks basis pengetahuan disajikan pada Tabel \ref{tab:knowledge_base_schema}.
 
 \begin{table}[H]
     \centering
@@ -573,15 +518,15 @@ Selain representasi vektor, setiap Poin juga menyimpan \textit{payload} yang ber
     \begin{tabular}{|l|l|l|p{7cm}|}
     \hline
     \textbf{Komponen} & \textbf{Kunci} & \textbf{Tipe} & \textbf{Deskripsi} \\ \hline
-    \multirow{2}{*}{\textbf{Vektor Padat}} & \texttt{gemini} & 3.072 & Representasi semantik dari Gemini Embedding. \\ \cline{2-4} 
-     & \texttt{openai} & 3.072 & Representasi semantik dari OpenAI Embedding. \\ \hline
-    \multirow{2}{*}{\textbf{Vektor Jarang}} & \texttt{splade} & Variabel & Representasi leksikal dari SPLADE++. \\ \cline{2-4} 
-     & \texttt{bm25} & Variabel & Skor relevansi berbasis frekuensi kata (BM25). \\ \hline
-    \multirow{5}{*}{\textbf{Payload}} & \texttt{page\_content} & String & Konten teks lengkap dari dokumen. \\ \cline{2-4} 
-     & \texttt{metadata.plant} & String & Nama tanaman. Diindeks secara \textit{full-text}. \\ \cline{2-4} 
-     & \texttt{metadata.disease} & String & Nama penyakit. Diindeks secara \textit{full-text}. \\ \cline{2-4} 
-     & \texttt{metadata.type} & String & Jenis dokumen (budidaya/penyakit). \\ \cline{2-4} 
-     & \texttt{metadata.source} & String & Sumber dokumen (PlantVillage/Gardenology). \\ \hline
+    \multirow{2}{*}{\textbf{Vektor Padat}} & \textit{gemini} & 3.072 & Representasi semantik dari Gemini Embedding. \\ \cline{2-4} 
+     & \textit{openai} & 3.072 & Representasi semantik dari OpenAI Embedding. \\ \hline
+    \multirow{2}{*}{\textbf{Vektor Jarang}} & \textit{splade} & Variabel & Representasi leksikal dari SPLADE++. \\ \cline{2-4} 
+     & \textit{bm25} & Variabel & Skor relevansi berbasis frekuensi kata (BM25). \\ \hline
+    \multirow{5}{*}{\textbf{Payload}} & \textit{page\_content} & String & Konten teks lengkap dari dokumen. \\ \cline{2-4} 
+     & \textit{metadata.plant} & String & Nama tanaman. Diindeks secara \textit{full-text}. \\ \cline{2-4} 
+     & \textit{metadata.disease} & String & Nama penyakit. Diindeks secara \textit{full-text}. \\ \cline{2-4} 
+     & \textit{metadata.type} & String & Jenis dokumen (budidaya/penyakit). \\ \cline{2-4} 
+     & \textit{metadata.source} & String & Sumber dokumen (PlantVillage/Gardenology). \\ \hline
     \end{tabular}%
     }
 \end{table}
@@ -590,10 +535,11 @@ Selain representasi vektor, setiap Poin juga menyimpan \textit{payload} yang ber
 \paragraph{Strategi Pencarian}
 Implementasi strategi pencarian pada modul ini dirancang untuk memaksimalkan relevansi dokumen melalui pendekatan bertingkat. Proses pencarian diawali dengan memberikan akses agen LLM untuk menerapkan filter metadata (seperti nama tanaman, penyakit, atau jenis dokumen) untuk membatasi ruang pencarian hanya pada entitas yang relevan. Selanjutnya, sistem melakukan pencarian hibrida yang menggabungkan hasil dari representasi vektor padat (\textit{dense embedding}) dan vektor jarang (\textit{sparse embedding}).
 
-Pada tahap pencarian hibrida, sistem dikonfigurasi agar agen LLM dapat melakukan pengambilan awal (\textit{prefetching}) terhadap sejumlah kandidat dokumen yang lebih besar, yakni sebesar $2k$, dari masing-masing indeks vektor. Hasil dari kedua jalur pencarian ini kemudian disatukan menggunakan algoritma \textit{Reciprocal Rank Fusion} (RRF). Algoritma ini memberikan bobot skor berdasarkan peringkat kemunculan dokumen di setiap daftar hasil, dengan tujuan memprioritaskan dokumen yang secara konsisten dinilai relevan oleh kedua metode pencarian. Persamaan \textit{Reciprocal Rank Fusion} (RRF) didefinisikan sebagai berikut:
+Pada tahap pencarian hibrida, sistem dikonfigurasi agar agen LLM dapat melakukan pengambilan awal (\textit{prefetching}) terhadap sejumlah kandidat dokumen yang lebih besar, yakni sebesar $2k$, dari masing-masing indeks vektor. Hasil dari kedua jalur pencarian ini kemudian disatukan menggunakan algoritma \textit{Reciprocal Rank Fusion} (RRF). Algoritma ini memberikan bobot skor berdasarkan peringkat kemunculan dokumen di setiap daftar hasil, dengan tujuan memprioritaskan dokumen yang secara konsisten dinilai relevan oleh kedua metode pencarian. Mekanisme penilaian skor \textit{Reciprocal Rank Fusion} (RRF) tersebut dirumuskan pada Persamaan \ref{eq:rrf}.
 
 \begin{equation}
     score(d \in D) = \sum_{r_d \in R(d)} \frac{1}{k + r_d}
+    \label{eq:rrf}
 \end{equation}
 
 \noindent di mana $D$ adalah himpunan dokumen hasil, $R(d)$ adalah himpunan peringkat dokumen $d$, dan $k$ adalah konstanta peredam.
@@ -607,66 +553,10 @@ Dokumen yang telah digabungkan melalui RRF kemudian diproses lebih lanjut oleh k
     \label{fig:knowledge_base_search_workflow}
 \end{figure}
 
-\paragraph{Evaluasi}
-Evaluasi kinerja modul pencarian informasi dilakukan secara \textit{offline} menggunakan pustaka \texttt{ranx} oleh \textcite{bassaniRanxBlazingFastPython2022}. Evaluasi ini bertujuan untuk mengukur efektivitas berbagai strategi pencarian dan konfigurasi model yang telah diimplementasikan dalam menemukan dokumen relevan dari korpus basis data pengetahuan.
-
-Persiapan evaluasi dimulai dengan penyusunan \textit{Query Relevance Judgments} (Qrels). Qrels merupakan standar kebenaran (\textit{ground truth}) yang memetakan setiap kueri dengan dokumen-dokumen yang dianggap relevan. Dalam penelitian ini, struktur Qrels direpresentasikan dalam format \textit{dictionary} Python sesuai dengan spesifikasi \texttt{ranx}, di mana setiap ID kueri memiliki daftar ID dokumen relevan beserta skor relevansinya.
-
-\begin{verbatim}
-qrels_dict = {
-    "q_1": {
-        "d_1": 1,
-        "d_2": 1,
-    },
-    # ...
-}
-\end{verbatim}
-
-Skor relevansi yang digunakan bersifat biner, di mana nilai 1 diberikan untuk dokumen yang relevan dan secara implisit nilai 0 untuk dokumen lainnya. Hal ini didasarkan pada fakta bahwa dataset QA sintetis dibangun dengan memasangkan kueri secara spesifik pada potongan dokumen sumber tertentu, sehingga relevansi dapat ditentukan secara deterministik.
-
-Proses evaluasi dilakukan dengan membandingkan hasil pencarian sistem (\textit{Run}) terhadap Qrels menggunakan serangkaian metrik standar dalam pencarian informasi. Mengingat penggunaan model \textit{embedding} dan LLM yang mutakhir (\textit{State-of-the-Art}), evaluasi difokuskan pada peringkat atas (Top-K) yang ketat, yaitu dengan nilai $k=5$. Pemilihan $k$ yang kecil ini bertujuan untuk memastikan sistem benar-benar menyajikan informasi yang paling relevan pada urutan teratas, sehingga meminimalkan beban kognitif pengguna dalam memilah informasi.
-
-Berikut adalah metrik-metrik yang digunakan dalam evaluasi:
-
-\begin{enumerate}[noitemsep]
-    \item \textit{Mean Reciprocal Rank} (MRR) \\
-    MRR mengukur rata-rata kebalikan dari peringkat dokumen relevan pertama yang ditemukan. Metrik ini sangat krusial untuk jenis pertanyaan faktual di mana pengguna hanya membutuhkan satu jawaban yang benar secepat mungkin. Nilai MRR dihitung dengan persamaan:
-    \begin{equation}
-        MRR = \frac{1}{|Q|} \sum_{i=1}^{|Q|} \frac{1}{rank_i}
-    \end{equation}
-    di mana $|Q|$ adalah jumlah kueri dan $rank_i$ adalah posisi peringkat dokumen relevan pertama untuk kueri ke-$i$.
-
-    \item \textit{Normalized Discounted Cumulative Gain} (nDCG@k) \\
-    nDCG@k mengevaluasi kualitas pemeringkatan dengan mempertimbangkan posisi dokumen relevan dalam daftar hasil. Dokumen relevan yang muncul di posisi lebih tinggi akan memberikan kontribusi skor yang lebih besar. Metrik ini dihitung dengan membagi \textit{Discounted Cumulative Gain} (DCG) dengan \textit{Ideal DCG} (IDCG).
-
-    Nilai DCG pada peringkat ke-$k$ didefinisikan sebagai akumulasi skor relevansi yang didiskon secara logaritmik:
-    \begin{equation}
-        DCG@k = \sum_{i=1}^{k} \frac{rel_i}{\log_2(i+1)}
-    \end{equation}
-
-    Sedangkan IDCG adalah nilai DCG maksimal yang dapat dicapai jika dokumen-dokumen relevan diurutkan pada posisi ideal (paling atas):
-    \begin{equation}
-        IDCG@k = \sum_{i=1}^{|REL_k|} \frac{rel_i}{\log_2(i+1)}
-    \end{equation}
-
-    Sehingga, nilai nDCG@k diperoleh melalui persamaan:
-    \begin{equation}
-        nDCG@k = \frac{DCG@k}{IDCG@k}
-    \end{equation}
-    Metrik ini digunakan untuk memastikan bahwa algoritma pencarian tidak hanya menemukan dokumen yang benar, tetapi juga mampu mengurutkannya berdasarkan tingkat kepentingannya.
-
-    \item \textit{Recall}@k \\
-    Recall@k mengukur proporsi dokumen relevan yang berhasil ditemukan dalam $k$ hasil teratas dibandingkan dengan total dokumen relevan yang tersedia untuk kueri tersebut.
-    \begin{equation}
-        Recall@k = \frac{|\{ \text{dokumen relevan} \} \cap \{ \text{dokumen terambil dalam top-}k \}|}{|\{ \text{total dokumen relevan} \}|}
-    \end{equation}
-    Metrik ini penting untuk mengevaluasi cakupan (\textit{coverage}) sistem dalam menyajikan berbagai perspektif informasi yang mungkin tersebar di beberapa dokumen.
-\end{enumerate}
-
 \subsubsection{Alat Pencarian Internet}
 Alat pencarian internet diimplementasikan menggunakan Tavily Search API. Tavily merupakan mesin pencari yang dioptimasi khusus untuk sistem agentik (\textit{agentic systems}) dengan tujuan memberikan hasil pencarian yang efisien, cepat, dan konsisten \parencite{tavilyaiTavilyaiTavilypython2026}. Penggunaan API ini memungkinkan sistem untuk mengabstraksi serangkaian proses kompleks dalam pengambilan informasi daring, yang mencakup pencarian, \textit{web scraping}, penyaringan konten, pemeringkatan ulang (\textit{re-ranking}), hingga ekstraksi informasi yang paling relevan secara otomatis.
 
-Konfigurasi parameter yang digunakan dalam inisialisasi alat pencarian ini dirinci pada Tabel \ref{tab:tavily_parameters}. Parameter \texttt{max\_results} diatur untuk mengembalikan lima dokumen teratas guna memberikan variasi sumber informasi yang cukup bagi agen. Topik pencarian diatur ke "general" untuk memastikan cakupan sumber yang luas. Selain itu, fitur pencarian gambar diaktifkan untuk memperkaya konteks visual yang dapat diberikan kepada pengguna.
+Konfigurasi parameter yang digunakan dalam inisialisasi alat pencarian ini dirinci pada Tabel \ref{tab:tavily_parameters}. Parameter \textit{max\_results} diatur untuk mengembalikan lima dokumen teratas guna memberikan variasi sumber informasi yang cukup bagi agen. Topik pencarian diatur ke "general" untuk memastikan cakupan sumber yang luas. Selain itu, fitur pencarian gambar diaktifkan untuk memperkaya konteks visual yang dapat diberikan kepada pengguna.
 
 \begin{table}[H]
     \centering
@@ -677,11 +567,11 @@ Konfigurasi parameter yang digunakan dalam inisialisasi alat pencarian ini dirin
     \begin{tabular}{|l|l|p{7cm}|}
     \hline
     \textbf{Parameter} & \textbf{Nilai} & \textbf{Deskripsi} \\ \hline
-    \texttt{max\_results} & 5 & Jumlah maksimal hasil dokumen yang dikembalikan. \\ \hline
-    \texttt{topic} & "general" & Kategori topik pencarian untuk cakupan sumber umum. \\ \hline
-    \texttt{search\_depth} & "advanced" & Kedalaman pencarian untuk hasil yang lebih komprehensif. \\ \hline
-    \texttt{include\_images} & \textit{True} & Mengembalikan tautan gambar yang relevan. \\ \hline
-    \texttt{include\_image\_descriptions} & \textit{True} & Menyertakan deskripsi tekstual untuk gambar yang ditemukan. \\ \hline
+    \textit{max\_results} & 5 & Jumlah maksimal hasil dokumen yang dikembalikan. \\ \hline
+    \textit{topic} & "general" & Kategori topik pencarian untuk cakupan sumber umum. \\ \hline
+    \textit{search\_depth} & "advanced" & Kedalaman pencarian untuk hasil yang lebih komprehensif. \\ \hline
+    \textit{include\_images} & \textit{True} & Mengembalikan tautan gambar yang relevan. \\ \hline
+    \textit{include\_image\_descriptions} & \textit{True} & Menyertakan deskripsi tekstual untuk gambar yang ditemukan. \\ \hline
     \end{tabular}
     }
 \end{table}
@@ -701,8 +591,8 @@ Seluruh komponen yang beroperasi secara lokal dan berinteraksi dengan sistem age
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{bab3/arsitekturantarmukasistem.png}
-    \caption{Arsitektur Antarmuka Sistem Agentik}
+    \includegraphics[width=0.7\textwidth]{bab3/arsitekturantarmukasistem.png}
+    \caption{Arsitektur antarmuka sistem agentik}
     \label{fig:high_level_architecture}
 \end{figure}
 
@@ -782,8 +672,21 @@ Gambar \ref{fig:prototipe_antarmuka} memperlihatkan tampilan utama dari prototip
     \label{fig:prototipe_antarmuka}
 \end{figure}
 
-\subsubsection{Pengujian Antarmuka}
-Pengujian antarmuka dilakukan menggunakan metode \textit{Black Box Testing} untuk memastikan bahwa seluruh fungsionalitas yang telah dirancang pada \textit{Use Case Diagram} dapat beroperasi sesuai dengan ekspektasi pengguna. textit{Black Box Testing} merupakan metode pengujian perangkat lunak yang berfokus pada spesifikasi fungsional sistem \parencite{bhasinBlackBoxTesting2014}. Pengujian fungsionalitas antarmuka dirangkum dalam Tabel \ref{tab:black_box_testing_expected}.
+
+\section{Pengujian}
+Tahap pengujian dilakukan untuk memvalidasi fungsionalitas dari setiap komponen sistem yang telah dikembangkan sebelum dilakukan evaluasi kinerja secara menyeluruh. Pengujian ini mencakup verifikasi operasional pada modul deteksi objek, modul pencarian gambar-teks, modul pencarian informasi, serta antarmuka pengguna.
+
+\subsection{Modul Deteksi Objek Tanaman}
+Pengujian fungsionalitas modul deteksi objek dilakukan untuk memverifikasi kemampuan integrasi model YOLOv11 dan OWLv2 dalam lingkungan sistem. Pengujian dilakukan dengan memberikan citra masukan yang mengandung objek daun serta citra dengan objek tanaman lain seperti buah atau batang. Indikator keberhasilan pengujian adalah sistem mampu menghasilkan kotak pembatas (\textit{bounding box}) yang tepat pada objek yang relevan dan mengembalikan koordinat serta label kelas yang sesuai untuk diproses oleh tahap selanjutnya.
+
+\subsection{Modul Pencarian Gambar-Teks Penyakit}
+Pengujian modul pencarian gambar-teks difokuskan pada validasi fungsional dari empat strategi pencarian yang telah diimplementasikan, yaitu \textit{text-to-text}, \textit{text-to-image}, \textit{image-to-image}, dan \textit{image-to-text}. Setiap strategi diuji dengan memberikan input yang sesuai (teks atau gambar) dan memeriksa relevansi hasil pencarian yang dikembalikan oleh basis data vektor Qdrant. Pengujian ini bertujuan untuk memastikan bahwa mekanisme \textit{embedding} dan \textit{retrieval} berfungsi dengan baik dalam berbagai modalitas input.
+
+\subsection{Modul Pencarian Informasi}
+Pengujian pada modul pencarian informasi dilakukan untuk memastikan konektivitas dan responsivitas dari dua alat pencarian utama, yaitu pencarian basis data pengetahuan internal dan pencarian internet melalui Tavily API. Pengujian dilakukan dengan mengirimkan kueri terkait manajemen penyakit dan memverifikasi apakah sistem dapat mengambil dokumen yang relevan dari korpus internal atau tautan eksternal yang valid.
+
+\subsection{Antarmuka Sistem Agentik}
+Pengujian antarmuka dilakukan menggunakan metode \textit{Black Box Testing} untuk memastikan bahwa seluruh fungsionalitas yang telah dirancang pada \textit{Use Case Diagram} dapat beroperasi sesuai dengan ekspektasi pengguna. \textit{Black Box Testing} merupakan metode pengujian perangkat lunak yang berfokus pada spesifikasi fungsional sistem \parencite{bhasinBlackBoxTesting2014}. Pengujian fungsionalitas antarmuka dirangkum dalam Tabel \ref{tab:black_box_testing_expected}.
 
 \begin{table}[H]
     \centering
@@ -795,32 +698,30 @@ Pengujian antarmuka dilakukan menggunakan metode \textit{Black Box Testing} untu
     \begin{tabular}{|l|l|p{4.5cm}|p{5cm}|}
     \hline
     ID & Fitur & Skenario Pengujian & Hasil yang Diharapkan \\ \hline
-    \textbf{UC1} & Mengirim Prompt & Pengguna mengetik instruksi pada kolom teks (\textit{textarea}) dan menekan tombol kirim (ikon \texttt{ArrowUp}). & Sistem mengirim pesan ke server dan menampilkan respons agen secara bertahap (\textit{streaming}). \\ \hline
-    \textbf{UC2} & Mengunggah Citra Tanaman & Pengguna mengklik ikon \texttt{Paperclip} untuk memilih gambar atau menyeret berkas langsung ke area percakapan. & Gambar muncul sebagai \textit{preview} di atas kolom input dan berhasil dikirim bersama pesan teks. \\ \hline
+    \textbf{UC1} & Mengirim Prompt & Pengguna mengetik instruksi pada kolom teks (\textit{textarea}) dan menekan tombol kirim (ikon \textit{ArrowUp}). & Sistem mengirim pesan ke server dan menampilkan respons agen secara bertahap (\textit{streaming}). \\ \hline
+    \textbf{UC2} & Mengunggah Citra Tanaman & Pengguna mengklik ikon \textit{Paperclip} untuk memilih gambar atau menyeret berkas langsung ke area percakapan. & Gambar muncul sebagai \textit{preview} di atas kolom input dan berhasil dikirim bersama pesan teks. \\ \hline
     \textbf{UC3} & Melihat Hasil \& Saran & Pengguna menunggu proses inferensi selesai setelah mengirimkan kueri identifikasi. & Jawaban berupa diagnosis penyakit dan panduan penanganan muncul secara lengkap di area chat. \\ \hline
     \textbf{UC4} & Mengelola Riwayat Percakapan & Pengguna memilih sesi pada \textit{sidebar}, mengubah nama sesi, atau mengirim pesan baru pada sesi lama. & Riwayat dimuat, nama sesi berubah, dan agen memproses pesan baru dengan konteks sesi tersebut. \\ \hline
-    \textbf{UC5} & Melihat Transparansi Agen & Pengguna menekan tombol kontrol alat (ikon \texttt{Wrench}) untuk mengaktifkan visibilitas proses. & Detail pemanggilan alat (\textit{tool calls}) dan hasil observasi internal agen ditampilkan di antara pesan chat. \\ \hline
+    \textbf{UC5} & Melihat Transparansi Agen & Pengguna menekan tombol kontrol alat (ikon \textit{Wrench}) untuk mengaktifkan visibilitas proses. & Detail pemanggilan alat (\textit{tool calls}) dan hasil observasi internal agen ditampilkan di antara pesan chat. \\ \hline
     \end{tabular}
     }
 \end{table}
 
-\section{Pengujian dan Evaluasi Sistem Agentik}
+\subsection{Sistem Agentik}
 Tahapan pengujian dan evaluasi dilakukan untuk memvalidasi kinerja sistem agentik secara komprehensif. Seluruh rangkaian pengujian ini diorkestrasi menggunakan platform LangSmith. Platform ini difungsikan sebagai pusat manajemen pengujian yang mencakup pengelolaan \textit{prompt} dan teknik \textit{prompt engineering} untuk sistem agen LLM, manajemen dataset pengujian, serta analisis hasil eksperimen secara terpusat.
-
-Evaluasi dalam penelitian ini dilakukan dengan metode evaluasi \textit{offline}. Dalam konteks ini, istilah \textit{offline} merujuk pada prosedur evaluasi yang dijalankan menggunakan dataset terkurasi selama fase pengembangan untuk mengukur tolok ukur performa (\textit{benchmark}) dan mendeteksi regresi atau penurunan kinerja sistem, bukan evaluasi secara waktu nyata (\textit{real-time}) pada interaksi pengguna asli di lingkungan produksi. Penilaian kualitas sistem dilakukan menggunakan pendekatan \textit{LLM-as-a-judge}, yang memanfaatkan kemampuan model bahasa besar sebagai evaluator otomatis. Model Gemini 3 Pro dipilih sebagai evaluator utama karena kemampuan penalarannya yang unggul, sementara Gemini 2.5 Pro digunakan sebagai cadangan apabila terjadi kendala batasan laju permintaan (\textit{rate limit}). Selain LangSmith, proses ini didukung oleh pustaka evaluasi lain, yakni RAGAS dan DeepEval.
 
 Rangkaian pengujian dibagi menjadi dua kategori utama yang dibahas pada subbab-subbab berikut, yaitu pengujian satu tahap untuk mengukur kapabilitas penyelesaian tugas tunggal dan pengujian multi-tahap untuk mengevaluasi konsistensi interaksi dalam percakapan berkelanjutan.
 
-\subsection{Pengujian Satu Tahap}
+\subsubsection{Pengujian Satu Tahap}
 Pengujian satu tahap difokuskan pada evaluasi kemampuan agen dalam menyelesaikan tugas identifikasi dan tanya jawab dalam satu giliran interaksi tunggal. Pengujian ini terdiri dari eksperimen VQA (\textit{Visual Question Answering}). Pengujian ini merupakan pengujian utama yang dilakukan untuk mengevaluasi kinerja sistem secara menyeluruh. Skenario ini dirancang untuk merepresentasikan interaksi dunia nyata di mana pengguna mengunggah gambar tanaman beserta pertanyaan teks terkait kondisinya. Dalam eksperimen ini, seluruh kapabilitas sistem akan diuji secara terintegrasi, meliputi kemampuan pemahaman konteks multimodal, akurasi identifikasi penyakit visual, ketepatan pengambilan informasi dari basis pengetahuan, kesesuaian penggunaan alat, serta kualitas dan relevansi jawaban yang diberikan kepada pengguna.
 
-\subsubsection{Persiapan Data}
+\paragraph{Persiapan Data}
 Dataset yang digunakan dalam pengujian satu tahap dikelompokkan menjadi dua jenis berdasarkan distribusi datanya, yaitu dataset \textit{In-Distribution} (ID) dan dataset \textit{Out-of-Distribution} (OOD).
 
-\paragraph{\textit{Dataset In-Distribution} (ID)}
+\subparagraph{\textit{Dataset In-Distribution} (ID)}
 Dataset ID merepresentasikan data yang berada dalam cakupan distribusi pengetahuan internal sistem. Data ini diambil dari subset dataset PlantWild yang telah digunakan dalam penyusunan indeks pencarian gambar-teks. Sebagaimana dijelaskan pada bagian sebelumnya, dataset ini mencakup 18.542 citra dari 89 kelas kondisi kesehatan pada 13 spesies tanaman. Untuk keperluan pengujian, dilakukan pengambilan sampel acak sebanyak 3 citra dari setiap kelas, sehingga diperoleh total 267 citra uji. Penggunaan sampel ini bertujuan untuk memvalidasi kemampuan sistem dalam mengenali dan mengambil informasi yang sudah pernah dipelajari atau diindeks sebelumnya.
 
-\paragraph{Dataset Out-of-Distribution (OOD)}
+\subparagraph{\textit{Dataset Out-of-Distribution} (OOD)}
 Dataset OOD disusun untuk menguji ketangguhan (\textit{robustness}) dan kemampuan generalisasi sistem dalam menangani kueri yang melibatkan spesies tanaman atau jenis penyakit yang tidak terdapat dalam basis pengetahuan internal. Dataset ini dikompilasi dari berbagai dataset publik yang mencakup 8 komoditas tanaman berbeda dengan total 40 kelas penyakit dan kondisi kesehatan unik. Rincian sumber data untuk setiap komoditas disajikan pada Tabel \ref{tab:ood_datasets}.
 
 \begin{table}[H]
@@ -877,7 +778,8 @@ Proses pembangkitan dataset ini dilakukan melalui alur kerja terstruktur untuk m
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[
-        node distance=1.2cm,
+        scale=0.8, transform shape,
+        node distance=1.0cm,
         font=\scriptsize,
         start/.style={circle, draw, fill=blue!10, minimum size=1cm, align=center},
         process/.style={rectangle, draw, rounded corners, fill=white, minimum width=3cm, minimum height=0.8cm, align=center},
@@ -886,7 +788,8 @@ Proses pembangkitan dataset ini dilakukan melalui alur kerja terstruktur untuk m
         io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, draw, fill=green!10, minimum width=2.5cm, align=center}
     ]
 
-    \node (input) [io] {Citra Masukan};
+    \node (start) [start] {Mulai};
+    \node (input) [io, below=of start] {Citra Masukan};
     \node (model) [process, below=of input] {Gemini 2.5 Flash};
     \node (qc) [process, below=of model] {Validasi Kualitas\\(Quality Control)};
     \node (check) [decision, below=of qc] {Terkait\\Tanaman?};
@@ -898,6 +801,7 @@ Proses pembangkitan dataset ini dilakukan melalui alur kerja terstruktur untuk m
     \node (output) [io, below=of gen] {JSON Output};
 
     \draw [arrow] (input) -- (model);
+    \draw [arrow] (start) -- (input);
     \draw [arrow] (model) -- (qc);
     \draw [arrow] (qc) -- (check);
     \draw [arrow] (check) -- node[above] {Tidak} (discard);
@@ -906,12 +810,17 @@ Proses pembangkitan dataset ini dilakukan melalui alur kerja terstruktur untuk m
     \draw [arrow] (logic) -- (gen);
     \draw [arrow] (gen) -- (output);
 
+    \node (end) [start, below=of output] {Selesai};
+
+    \draw [arrow] (discard) |- (end);
+    \draw [arrow] (output) -- (end);
+
     \end{tikzpicture}
-    \caption{Alur Instruksi Pembangkitan Dataset Sintetis dengan LLM}
+    \caption{Alur instruksi pembangkitan dataset sintetis dengan LLM}
     \label{fig:dataset_generation_pipeline}
 \end{figure}
 
-Hasil akhir dari proses generasi ini disimpan dalam format JSON yang terstruktur. Struktur ini mencakup input simulasi pengguna, luaran referensi yang diharapkan (\textit{ground truth}), serta metadata pendukung. Contoh entri dataset hasil generasi untuk ketiga skenario disajikan pada Gambar \ref{fig:synthetic_dataset_examples}.
+{\small Hasil akhir dari proses generasi ini disimpan dalam format JSON yang terstruktur. Struktur ini mencakup input simulasi pengguna, luaran referensi yang diharapkan (\textit{ground truth}), serta metadata pendukung. Contoh entri dataset hasil generasi untuk ketiga skenario disajikan pada Gambar \ref{fig:synthetic_dataset_examples}. \par}
 
 \begin{figure}[H]
     \centering
@@ -936,8 +845,185 @@ Hasil akhir dari proses generasi ini disimpan dalam format JSON yang terstruktur
     \label{fig:synthetic_dataset_examples}
 \end{figure}
 
-\subsubsection{Evaluasi}
-Evaluasi pada pengujian satu tahap dilakukan menggunakan serangkaian metrik yang dirancang secara spesifik untuk mengukur kinerja sistem agentik pada berbagai aspek. Mayoritas metrik yang digunakan dalam evaluasi ini, yaitu \textit{Disease Accuracy}, \textit{Trajectory Accuracy}, \textit{Agent Goal Accuracy}, dan \textit{Faithfulness}, merupakan metrik berbasis \textit{LLM-as-a-judge} yang bersifat \textit{self-explaining}. Hal ini berarti bahwa selain menghasilkan skor kuantitatif, metrik-metrik tersebut juga menyertakan penjelasan kualitatif yang mendasari penilaian yang diberikan, sehingga memberikan transparansi lebih dalam proses evaluasi. Lebih lanjut, meskipun setiap metrik menerima masukkan dataset yang berbeda-beda, seluruh evaluator dirancang untuk menerima masukan citra dari pengguna. Hal ini memungkinkan evaluator untuk melakukan validasi sistem secara multimodal dengan mempertimbangkan bukti visual dalam penilaiannya. Penjelasan rinci mengenai metrik-metrik tersebut dijabarkan sebagai berikut.
+\subsubsection{Pengujian Multi-Tahap}
+Pengujian multi-tahap dalam penelitian ini difokuskan pada eksperimen Batasan Domain (\textit{Domain Boundary}). Eksperimen ini bertujuan untuk menguji ketahanan sistem dalam menjaga konsistensi peran dan relevansi topik selama interaksi percakapan yang berlangsung dalam beberapa giliran (\textit{multi-turn}). Pengujian ini diorkestrasi menggunakan fitur simulasi interaksi dari platform LangSmith, di mana agen dihadapkan dengan "pengguna simulasi" (\textit{simulated user}) yang dijalankan oleh LLM lain dengan instruksi persona tertentu. Pendekatan ini memungkinkan evaluasi yang dinamis terhadap respons agen saat menghadapi berbagai skenario percakapan yang berkembang.
+
+\paragraph{Persiapan Data}
+Persiapan data dilakukan dengan menyusun dataset yang berisi 10 contoh skenario interaksi. Setiap skenario dilengkapi dengan pesan awal pengguna dan instruksi sistem untuk pengguna simulasi guna membentuk persona yang spesifik. Variasi persona yang digunakan dalam pengujian ini dikelompokkan sebagai berikut:
+
+\begin{enumerate}[nosep]
+    \item \textit{On-topic Personas}: Persona pengguna yang mengajukan pertanyaan relevan mengenai kesehatan tanaman, baik disertai bukti visual maupun teks saja. Contoh persona ini meliputi Petani Tomat, Penghobi Mawar, dan Petani Cabai.
+    \item \textit{Off-topic Personas}: Persona pengguna yang secara eksplisit meminta bantuan di luar domain keahlian agen. Contohnya mencakup pemilik mobil yang meminta saran mekanis, investor yang menanyakan harga saham, dan pertanyaan medis terkait kesehatan manusia.
+    \item \textit{Edge Cases}: Skenario batas yang menguji kemampuan diskriminasi visual agen, seperti pengguna yang mengirimkan foto tanaman artifisial atau objek hewan (misalnya kucing) untuk melihat apakah agen dapat membedakan objek non-tanaman.
+    \item \textit{Context Switchers}: Persona yang dirancang untuk menguji fleksibilitas agen dalam menangani perpindahan topik. Kategori ini mencakup perpindahan dari topik tanaman ke topik lain (\textit{On-to-Off}) untuk menguji ketegasan agen, serta perpindahan dari topik umum ke topik tanaman (\textit{Off-to-On}) untuk menguji responsivitas agen terhadap pertanyaan valid setelah penolakan awal.
+\end{enumerate}
+
+\section{Evaluasi}
+Tahap evaluasi bertujuan untuk mengukur kinerja kuantitatif dari komponen-komponen utama sistem serta kualitas luaran akhir sistem agentik menggunakan metrik-metrik standar dan kustom.
+
+\subsection{Modul Deteksi Objek Tanaman}
+Evaluasi model deteksi dilakukan untuk mengukur ketepatan lokalisasi dan klasifikasi objek. Metrik yang digunakan meliputi \textit{Precision}, \textit{Recall}, \textit{F1-score}, serta \textit{mean Average Precision} (mAP) pada ambang batas IoU 50\% (mAP50) dan rentang 50--95\% (mAP50-95). Definisi metrik tersebut diuraikan sebagai berikut:
+
+\begin{enumerate}[nosep]
+    \item IoU (\textit{Intersection over Union}): Mengukur tingkat tumpang tindih antara kotak prediksi ($BB_{pred}$) dan \textit{ground truth} ($BB_{gt}$). Secara praktis, metrik ini menunjukkan seberapa presisi model dalam melokalisasi posisi objek daun yang sebenarnya sebagaimana ditunjukkan pada Persamaan \ref{eq:iou}.
+    \begin{equation}
+        IoU = \frac{Area(BB_{pred} \cap BB_{gt})}{Area(BB_{pred} \cup BB_{gt})}
+        \label{eq:iou}
+    \end{equation}
+
+    \item Precision: Rasio prediksi positif yang benar terhadap total prediksi positif. Metrik ini mengindikasikan tingkat kepercayaan terhadap prediksi model, yakni seberapa sering model benar ketika menyatakan mendeteksi daun dan meminimalkan deteksi palsu, sebagaimana dirumuskan pada Persamaan \ref{eq:precision}.
+    \begin{equation}
+        Precision = \frac{TP}{TP + FP}
+        \label{eq:precision}
+    \end{equation}
+
+    \item Recall: Rasio prediksi positif yang benar terhadap total sampel positif aktual. Metrik ini mengukur sensitivitas model, yakni kemampuannya untuk menemukan seluruh objek daun yang ada dalam citra dan meminimalkan objek yang terlewat, seperti yang dinyatakan dalam Persamaan \ref{eq:recall}.
+    \begin{equation}
+        Recall = \frac{TP}{TP + FN}
+        \label{eq:recall}
+    \end{equation}
+
+    \item F1-score: Rata-rata harmonis antara \textit{precision} dan \textit{recall}. Metrik ini memberikan gambaran keseimbangan performa model, memastikan model tidak hanya berhati-hati dalam mendeteksi tetapi juga mampu menemukan objek sebanyak mungkin, yang dihitung menggunakan Persamaan \ref{eq:f1}.
+    \begin{equation}
+        F1 = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}
+        \label{eq:f1}
+    \end{equation}
+
+    \item mAP (\textit{mean Average Precision}): Rata-rata \textit{Average Precision} (AP) di seluruh kelas. Metrik ini merupakan standar evaluasi menyeluruh yang merepresentasikan keandalan model pada berbagai tingkat ambang batas deteksi, sebagaimana didefinisikan pada Persamaan \ref{eq:map}.
+    \begin{equation}
+        mAP = \frac{1}{N} \sum_{i=1}^{N} AP_i
+        \label{eq:map}
+    \end{equation}
+\end{enumerate}
+
+Selain metrik akurasi, evaluasi performa waktu atau latensi inferensi dilakukan untuk mengukur efisiensi model saat dijalankan pada perangkat dengan sumber daya terbatas. Pengukuran latensi dilakukan melalui prosedur \textit{benchmarking} yang dirancang untuk mensimulasikan kondisi penggunaan nyata. Proses ini diawali dengan mengekspor model ke format ONNX (\textit{Open Neural Network Exchange}) dan dijalankan menggunakan \textit{engine} ONNX Runtime dengan penyedia eksekusi CPU (\textit{CPU Execution Provider}).
+
+Prosedur pengujian terdiri dari dua tahap, yaitu fase pemanasan (\textit{warm-up}) dan fase pengujian utama. Fase pemanasan dilakukan sebanyak 30 iterasi untuk menstabilkan performa sistem dan memastikan model telah dimuat sepenuhnya ke dalam memori. Selanjutnya, fase pengujian utama dilakukan sebanyak 300 iterasi menggunakan citra yang dipilih secara acak dari dataset. Pada setiap iterasi, waktu eksekusi dicatat untuk tiga komponen proses: (1) prapemrosesan, yang meliputi \textit{resizing} citra ke resolusi $416 \times 416$ piksel, normalisasi, dan penyusunan \textit{batch}; (2) inferensi model; dan (3) pascapemrosesan, yang meliputi penskalaan koordinat dan penerapan \textit{Non-Maximum Suppression} (NMS). Latensi total dihitung sebagai akumulasi dari ketiga tahapan tersebut. Alur kerja prosedur \textit{benchmarking} ini diilustrasikan pada Gambar \ref{fig:benchmark_flowchart}.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.0cm,
+        font=\small,
+        start/.style={circle, draw, fill=blue!10, minimum size=1cm, align=center},
+        process/.style={rectangle, draw, rounded corners, fill=white, minimum width=3.5cm, minimum height=0.8cm, align=center},
+        decision/.style={diamond, draw, fill=yellow!10, aspect=2, inner sep=0pt, minimum width=2.5cm, align=center},
+        arrow/.style={-stealth, thick}
+    ]
+
+    \node (start) [start] {Mulai};
+    \node (init) [process, below=of start] {Inisialisasi Model ONNX\\\& Sampel Citra};
+    \node (warmup) [process, below=of init] {Fase Pemanasan\\(30 Iterasi)};
+    
+    \node (iter_start) [decision, below=of warmup] {Iterasi Uji\\$<$ 300?};
+    
+    \node (pre) [process, below=0.8cm of iter_start] {Prapemrosesan\\(Resize, Normalize)};
+    \node (infer) [process, below=0.5cm of pre] {Inferensi Model\\(ONNX Runtime CPU)};
+    \node (post) [process, below=0.5cm of infer] {Pascapemrosesan\\(NMS, Scaling)};
+    \node (record) [process, below=0.5cm of post] {Catat Latensi Total};
+    
+    \node (calc) [process, right=1.5cm of iter_start] {Hitung Statistik\\(p50, p95)};
+    \node (end) [start, below=of calc] {Selesai};
+
+    \draw [arrow] (start) -- (init);
+    \draw [arrow] (init) -- (warmup);
+    \draw [arrow] (warmup) -- (iter_start);
+    
+    \draw [arrow] (iter_start) -- node[right] {Ya} (pre);
+    \draw [arrow] (pre) -- (infer);
+    \draw [arrow] (infer) -- (post);
+    \draw [arrow] (post) -- (record);
+    
+    \draw [arrow] (record.west) -- ++(-0.5,0) |- (iter_start.west);
+    
+    \draw [arrow] (iter_start) -- node[above] {Tidak} (calc);
+    \draw [arrow] (calc) -- (end);
+
+    \end{tikzpicture}
+    \caption{Diagram Alur Prosedur \textit{Benchmarking} Latensi Model}
+    \label{fig:benchmark_flowchart}
+\end{figure}
+
+Data latensi yang dikumpulkan dari fase pengujian kemudian dianalisis secara statistik menggunakan metrik persentil ke-50 (p50) dan persentil ke-95 (p95). Misalkan $T = \{t_1, t_2, \dots, t_n\}$ adalah himpunan waktu latensi total yang telah diurutkan secara menaik, definisi dan relevansi praktis dari kedua metrik tersebut adalah:
+
+\begin{enumerate}[nosep]
+    \item p50 (Median): Merepresentasikan nilai tengah dari distribusi latensi. Metrik ini menggambarkan kecepatan respons tipikal yang akan dialami oleh mayoritas pengguna dalam penggunaan normal. Secara matematis, p50 dapat dihitung menggunakan Persamaan \ref{eq:p50}:
+    \begin{equation}
+        p50 = \begin{cases} t_{\frac{n+1}{2}} & \text{jika } n \text{ ganjil} \\ \frac{1}{2} (t_{\frac{n}{2}} + t_{\frac{n}{2}+1}) & \text{jika } n \text{ genap} \end{cases}
+        \label{eq:p50}
+    \end{equation}
+
+    \item p95 (Persentil ke-95): Merepresentasikan ambang batas waktu di mana 95\% dari total sampel inferensi lebih cepat dari nilai tersebut. Metrik ini digunakan untuk mengukur performa dalam skenario terburuk (\textit{tail latency}), memastikan sistem tetap responsif bahkan saat memproses citra yang kompleks atau dalam kondisi beban tinggi. Nilai p95 dihitung sesuai Persamaan \ref{eq:p95}:
+    \begin{equation}
+        p95 = t_{\lceil 0.95 \cdot n \rceil}
+        \label{eq:p95}
+    \end{equation}
+\end{enumerate}
+
+Setelah tahap evaluasi, dilakukan \textit{benchmarking} dengan menganalisis hubungan antara mAP dan latensi melalui grafik \textit{Pareto frontier}. Grafik \textit{Pareto frontier} digunakan untuk mengidentifikasi sekumpulan model yang memberikan kombinasi performa terbaik tanpa ada model lain yang lebih unggul di kedua aspek secara bersamaan \parencite{shakyaSmallObjectDetectionEdge2026}. Visualisasi contoh grafik \textit{Pareto frontier} disajikan pada Gambar \ref{fig:pareto_curve}. Analisis ini bertujuan untuk mengidentifikasi varian model yang menawarkan latensi paling minimal dengan tetap mempertahankan performa deteksi yang optimal.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{bab3/contohparetofrontier.png}
+    \caption[Contoh Grafik \textit{Pareto Frontier} mAP vs Latensi]{Contoh Grafik \textit{Pareto Frontier} mAP vs Latensi \parencite{shakyaSmallObjectDetectionEdge2026}}
+    \label{fig:pareto_curve}
+\end{figure}
+
+\subsection{Modul Pencarian Informasi}
+Evaluasi kinerja modul pencarian informasi dilakukan secara \textit{offline} menggunakan pustaka \textit{ranx} oleh \textcite{bassaniRanxBlazingFastPython2022}. Evaluasi ini bertujuan untuk mengukur efektivitas berbagai strategi pencarian dan konfigurasi model yang telah diimplementasikan dalam menemukan dokumen relevan dari korpus basis data pengetahuan.
+
+Persiapan evaluasi dimulai dengan penyusunan \textit{Query Relevance Judgments} (Qrels). Qrels merupakan standar kebenaran (\textit{ground truth}) yang memetakan setiap kueri dengan dokumen-dokumen yang dianggap relevan. Dalam penelitian ini, struktur Qrels direpresentasikan dalam format \textit{dictionary} Python sesuai dengan spesifikasi \textit{ranx}, di mana setiap ID kueri memiliki daftar ID dokumen relevan beserta skor relevansinya.
+
+Skor relevansi yang digunakan bersifat biner, di mana nilai 1 diberikan untuk dokumen yang relevan dan secara implisit nilai 0 untuk dokumen lainnya. Hal ini didasarkan pada fakta bahwa dataset QA sintetis dibangun dengan memasangkan kueri secara spesifik pada potongan dokumen sumber tertentu, sehingga relevansi dapat ditentukan secara deterministik.
+
+Proses evaluasi dilakukan dengan membandingkan hasil pencarian sistem (\textit{Run}) terhadap Qrels menggunakan serangkaian metrik standar dalam pencarian informasi. Mengingat penggunaan model \textit{embedding} dan LLM yang mutakhir (\textit{State-of-the-Art}), evaluasi difokuskan pada peringkat atas (Top-K) yang ketat, yaitu dengan nilai $k=5$. Pemilihan $k$ yang kecil ini bertujuan untuk memastikan sistem benar-benar menyajikan informasi yang paling relevan pada urutan teratas, sehingga meminimalkan beban kognitif pengguna dalam memilah informasi.
+
+Berikut adalah metrik-metrik yang digunakan dalam evaluasi:
+
+\begin{enumerate}[noitemsep]
+    \item \textit{Mean Reciprocal Rank} (MRR) \\
+    MRR mengukur rata-rata kebalikan dari peringkat dokumen relevan pertama yang ditemukan. Metrik ini sangat krusial untuk jenis pertanyaan faktual di mana pengguna hanya membutuhkan satu jawaban yang benar secepat mungkin. Nilai MRR dihitung dengan Persamaan \ref{eq:mrr}:
+    \begin{equation}
+        MRR = \frac{1}{|Q|} \sum_{i=1}^{|Q|} \frac{1}{rank_i}
+        \label{eq:mrr}
+    \end{equation}
+    di mana $|Q|$ adalah jumlah kueri dan $rank_i$ adalah posisi peringkat dokumen relevan pertama untuk kueri ke-$i$.
+
+    \item \textit{Normalized Discounted Cumulative Gain} (nDCG@k) \\
+    nDCG@k mengevaluasi kualitas pemeringkatan dengan mempertimbangkan posisi dokumen relevan dalam daftar hasil. Dokumen relevan yang muncul di posisi lebih tinggi akan memberikan kontribusi skor yang lebih besar. Metrik ini dihitung dengan membagi \textit{Discounted Cumulative Gain} (DCG) dengan \textit{Ideal DCG} (IDCG).
+
+    Nilai DCG pada peringkat ke-$k$ didefinisikan pada Persamaan \ref{eq:dcg} sebagai akumulasi skor relevansi yang didiskon secara logaritmik:
+    \begin{equation}
+        DCG@k = \sum_{i=1}^{k} \frac{rel_i}{\log_2(i+1)}
+        \label{eq:dcg}
+    \end{equation}
+
+    Sedangkan IDCG adalah nilai DCG maksimal yang dapat dicapai jika dokumen-dokumen relevan diurutkan pada posisi ideal (paling atas) sebagaimana ditunjukkan pada Persamaan \ref{eq:idcg}:
+    \begin{equation}
+        IDCG@k = \sum_{i=1}^{|REL_k|} \frac{rel_i}{\log_2(i+1)}
+        \label{eq:idcg}
+    \end{equation}
+
+    Sehingga, nilai nDCG@k diperoleh melalui Persamaan \ref{eq:ndcg}:
+    \begin{equation}
+        nDCG@k = \frac{DCG@k}{IDCG@k}
+        \label{eq:ndcg}
+    \end{equation}
+    Metrik ini digunakan untuk memastikan bahwa algoritma pencarian tidak hanya menemukan dokumen yang benar, tetapi juga mampu mengurutkannya berdasarkan tingkat kepentingannya.
+
+    \item \textit{Recall}@k \\
+    Recall@k mengukur proporsi dokumen relevan yang berhasil ditemukan dalam $k$ hasil teratas dibandingkan dengan total dokumen relevan yang tersedia untuk kueri tersebut.
+    \begin{equation}
+        Recall@k = \frac{|\{ \text{dokumen relevan} \} \cap \{ \text{dokumen terambil dalam top-}k \}|}{|\{ \text{total dokumen relevan} \}|}
+    \end{equation}
+    Metrik ini penting untuk mengevaluasi cakupan (\textit{coverage}) sistem dalam menyajikan berbagai perspektif informasi yang mungkin tersebar di beberapa dokumen.
+\end{enumerate}
+
+\subsection{Sistem Agentik}
+Evaluasi dalam penelitian ini dilakukan dengan metode evaluasi \textit{offline}. Penilaian kualitas sistem dilakukan menggunakan pendekatan \textit{LLM-as-a-judge}, yang memanfaatkan kemampuan model bahasa besar sebagai \textit{evaluator} LLM, yakni model yang difungsikan untuk menilai kualitas luaran sistem secara otomatis. Model Gemini 3 Pro dipilih sebagai evaluator utama karena kemampuan penalarannya yang unggul, sementara Gemini 2.5 Pro digunakan sebagai cadangan apabila terjadi kendala batasan laju permintaan (\textit{rate limit}). Selain LangSmith, proses ini didukung oleh pustaka evaluasi lain, yakni RAGAS dan DeepEval.
+
+\subsubsection{Evaluasi Pengujian Satu Tahap}
+Evaluasi pada pengujian satu tahap dilakukan menggunakan serangkaian metrik yang dirancang secara spesifik untuk mengukur kinerja sistem agentik pada berbagai aspek. Mayoritas metrik yang digunakan dalam evaluasi ini, yaitu \textit{Disease Accuracy}, \textit{Trajectory Accuracy}, \textit{Agent Goal Accuracy}, dan \textit{Faithfulness}, merupakan metrik berbasis \textit{LLM-as-a-judge} yang bersifat \textit{self-explaining}.
 
 \paragraph{Disease Accuracy}
 \textit{Disease Accuracy} ($M_{da}$) merupakan metrik kustom yang menjadi tolok ukur utama dalam penelitian ini untuk mengukur kemampuan sistem dalam mengidentifikasi penyakit tanaman. Berbeda dengan metrik klasifikasi konvensional yang hanya menilai ketepatan label kelas secara biner (benar/salah), metrik ini dirancang untuk melakukan evaluasi secara bernuansa (\textit{nuanced}) sesuai dengan prinsip fitopatologi. Dalam diagnosis penyakit tanaman, identifikasi tidak selalu harus menghasilkan nama penyakit yang persis sama, namun juga dianggap berhasil apabila sistem mampu mengidentifikasi sumber gejala (misalnya jenis patogen) atau kategori penyakit dengan benar meskipun nama spesifiknya sedikit berbeda.
@@ -953,66 +1039,20 @@ Untuk memastikan penilaian yang objektif dan konsisten, metrik ini diimplementas
     \begin{tabular}{|l|l|p{8cm}|}
     \hline
     \textbf{Kategori} & \textbf{Parameter} & \textbf{Deskripsi} \\ \hline
-    \multirow{2}{*}{\textbf{Input}} & \texttt{user\_text} & Teks pertanyaan atau keluhan yang diberikan pengguna. \\ \cline{2-3} 
-     & \texttt{image\_url} & Tautan citra tanaman yang diunggah pengguna. \\ \hline
-    \textbf{Output} & \texttt{final\_answer} & Jawaban akhir yang dihasilkan oleh agen. \\ \hline
-    \multirow{3}{*}{\textbf{Referensi}} & \texttt{expected\_disease} & Nama penyakit yang sebenarnya (\textit{ground truth}) atau label "TANAMAN SEHAT". \\ \cline{2-3} 
-     & \texttt{pathogen\_type} & Jenis patogen penyebab penyakit (misal: Fungi, Bakteri, Virus). \\ \cline{2-3} 
-     & \texttt{reference\_answer} & Jawaban referensi yang lengkap dan benar sebagai pembanding. \\ \hline
+    \multirow{2}{*}{\textbf{Input}} & \textit{user\_text} & Teks pertanyaan atau keluhan yang diberikan pengguna. \\ \cline{2-3} 
+     & \textit{image\_url} & Tautan citra tanaman yang diunggah pengguna. \\ \hline
+    \textbf{Output} & \textit{final\_answer} & Jawaban akhir yang dihasilkan oleh agen. \\ \hline
+    \multirow{3}{*}{\textbf{Referensi}} & \textit{expected\_disease} & Nama penyakit yang sebenarnya (\textit{ground truth}) atau label "TANAMAN SEHAT". \\ \cline{2-3} 
+     & \textit{pathogen\_type} & Jenis patogen penyebab penyakit (misal: Fungi, Bakteri, Virus). \\ \cline{2-3} 
+     & \textit{reference\_answer} & Jawaban referensi yang lengkap dan benar sebagai pembanding. \\ \hline
     \end{tabular}
 \end{table}
 
-Alur logika penilaian dalam DAG dirancang secara hierarkis. Evaluasi dimulai dengan pengecekan apakah kasus tersebut merupakan tanaman sehat yang berhasil diidentifikasi dengan benar. Jika tidak, evaluasi berlanjut ke tingkat ketepatan diagnosis penyakit, mulai dari ketepatan penyakit utama, kecocokan parsial (diagnosis diferensial), hingga ketepatan identifikasi jenis patogen. Terakhir, jika sistem gagal melakukan identifikasi, metrik menilai apakah sistem melakukan penundaan jawaban (\textit{abstention}) secara tepat karena ketidakcukupan bukti. Struktur alur logika ini divisualisasikan pada Gambar \ref{fig:disease_accuracy_dag}.
+Logika penilaian dalam DAG disusun secara hierarkis, diawali dengan verifikasi identifikasi tanaman sehat. Tahap selanjutnya mengevaluasi akurasi diagnosis, mulai dari penyakit utama, kecocokan parsial, hingga jenis patogen. Apabila identifikasi gagal, penilaian beralih pada ketepatan penundaan jawaban (\textit{abstention}) akibat kurangnya bukti. Visualisasi alur ini ditunjukkan pada Gambar \ref{fig:disease_accuracy_dag}.
 
 \begin{figure}[H]
     \centering
-    \begin{tikzpicture}[
-        node distance=1.5cm,
-        font=\small,
-        start/.style={circle, draw, fill=blue!10, minimum size=1cm, align=center},
-        decision/.style={diamond, draw, fill=yellow!10, aspect=2, inner sep=0pt, minimum width=3cm, align=center},
-        verdict/.style={rectangle, draw, rounded corners, fill=green!10, minimum width=2.5cm, minimum height=0.8cm, align=center},
-        fail/.style={rectangle, draw, rounded corners, fill=red!10, minimum width=2.5cm, minimum height=0.8cm, align=center},
-        arrow/.style={-stealth, thick}
-    ]
-
-    \node (start) [start] {Mulai};
-    \node (healthy) [decision, below=of start] {Identifikasi\\Sehat Benar?};
-    
-    \node (score1a) [verdict, right=1.5cm of healthy] {Skor 1.0\\(Benar Sehat)};
-    
-    \node (primary) [decision, below=of healthy] {Penyakit Utama\\Benar?};
-    \node (score1b) [verdict, right=1.5cm of primary] {Skor 1.0\\(Benar Penyakit)};
-    
-    \node (partial) [decision, below=of primary] {Parsial/Kategori\\Benar?};
-    \node (score075) [verdict, right=1.5cm of partial] {Skor 0.75\\(Parsial)};
-    
-    \node (pathogen) [decision, below=of partial] {Tipe Patogen\\Benar?};
-    \node (score05) [verdict, right=1.5cm of pathogen] {Skor 0.5\\(Patogen Benar)};
-    
-    \node (abstain) [decision, below=of pathogen] {Abstain\\Tepat?};
-    \node (score025) [verdict, right=1.5cm of abstain] {Skor 0.25\\(Abstain Tepat)};
-    
-    \node (score0) [fail, below=of abstain] {Skor 0.0\\(Salah Total)};
-
-    \draw [arrow] (start) -- (healthy);
-    
-    \draw [arrow] (healthy) -- node[above] {Ya} (score1a);
-    \draw [arrow] (healthy) -- node[right] {Tidak} (primary);
-    
-    \draw [arrow] (primary) -- node[above] {Ya} (score1b);
-    \draw [arrow] (primary) -- node[right] {Tidak} (partial);
-    
-    \draw [arrow] (partial) -- node[above] {Ya} (score075);
-    \draw [arrow] (partial) -- node[right] {Tidak} (pathogen);
-    
-    \draw [arrow] (pathogen) -- node[above] {Ya} (score05);
-    \draw [arrow] (pathogen) -- node[right] {Tidak} (abstain);
-    
-    \draw [arrow] (abstain) -- node[above] {Ya} (score025);
-    \draw [arrow] (abstain) -- node[right] {Tidak} (score0);
-
-    \end{tikzpicture}
+    \includegraphics[width=0.6\textwidth]{bab3/dagtree.png}
     \caption{Diagram Alur Logika Evaluasi Disease Accuracy menggunakan DAG}
     \label{fig:disease_accuracy_dag}
 \end{figure}
@@ -1020,7 +1060,7 @@ Alur logika penilaian dalam DAG dirancang secara hierarkis. Evaluasi dimulai den
 \paragraph{Trajectory Accuracy}
 \textit{Trajectory Accuracy} ($M_{ta}$) adalah metrik evaluasi yang dirancang untuk mengukur efisiensi dan ketepatan urutan pengambilan keputusan (\textit{trajectory}) oleh agen dalam menyelesaikan tugas. Evaluasi ini menggunakan pendekatan \textit{LLM-as-a-judge}, di mana LLM bertindak sebagai penilai kualitatif yang memvalidasi keputusan agen terhadap rubrik yang telah ditentukan. Pendekatan ini diterapkan karena mekanisme kerja sistem agentik yang kompleks, yang melibatkan mekanisme cadangan (\textit{fallback}) pada modul deteksi objek maupun pencarian informasi yang bergantung pada konteks situasi.
 
-Metrik ini dirancang menggunakan kerangka kerja AgentEval dari LangSmith. Penilaian dilakukan dengan membandingkan trajektori aktual agen terhadap trajektori referensi menggunakan prinsip \textit{superset} dan kesesuaian semantik. Prinsip \textit{superset} mengizinkan agen untuk memanggil alat tambahan yang relevan (misalnya, alat deteksi tambahan untuk validasi) selama seluruh alat kunci yang terdapat dalam referensi telah dipenuhi. Sementara itu, prinsip kesesuaian semantik memungkinkan evaluator untuk memvalidasi penggunaan alat yang berbeda namun memiliki fungsi yang setara, seperti penggunaan pencarian web (\texttt{web\_search}) untuk menggantikan pencarian basis pengetahuan (\texttt{knowledgebase\_search}) apabila informasi internal tidak memadai. Tabel \ref{tab:trajectory_data_requirements} menyajikan kebutuhan data untuk menjalankan evaluasi \textit{Trajectory Accuracy}.
+Metrik ini dirancang menggunakan kerangka kerja AgentEval dari LangSmith. Penilaian dilakukan dengan membandingkan trajektori aktual agen terhadap trajektori referensi menggunakan prinsip \textit{superset} dan kesesuaian semantik. Prinsip \textit{superset} mengizinkan agen untuk memanggil alat tambahan yang relevan (misalnya, alat deteksi tambahan untuk validasi) selama seluruh alat kunci yang terdapat dalam referensi telah dipenuhi. Sementara itu, prinsip kesesuaian semantik memungkinkan evaluator untuk memvalidasi penggunaan alat yang berbeda namun memiliki fungsi yang setara, seperti penggunaan pencarian web (\textit{web\_search}) untuk menggantikan pencarian basis pengetahuan (\textit{knowledgebase\_search}) apabila informasi internal tidak memadai. Tabel \ref{tab:trajectory_data_requirements} menyajikan kebutuhan data untuk menjalankan evaluasi \textit{Trajectory Accuracy}.
 
 \begin{table}[H]
     \centering
@@ -1031,10 +1071,10 @@ Metrik ini dirancang menggunakan kerangka kerja AgentEval dari LangSmith. Penila
     \begin{tabular}{|l|l|p{8cm}|}
     \hline
     \textbf{Kategori} & \textbf{Parameter} & \textbf{Deskripsi} \\ \hline
-    \multirow{2}{*}{\textbf{Input}} & \texttt{user\_text} & Instruksi atau pertanyaan teks dari pengguna. \\ \cline{2-3} 
-     & \texttt{image\_url} & Tautan citra tanaman yang menjadi konteks visual analisis. \\ \hline
-    \textbf{Aktual} & \texttt{trace\_messages} & Riwayat lengkap langkah eksekusi (\textit{trace}) dan pemanggilan alat oleh agen. \\ \hline
-    \textbf{Referensi} & \texttt{reference\_tool\_calls} & Daftar alat yang diharapkan dipanggil untuk menyelesaikan tugas secara optimal (Standar Emas). \\ \hline
+    \multirow{2}{*}{\textbf{Input}} & \textit{user\_text} & Instruksi atau pertanyaan teks dari pengguna. \\ \cline{2-3} 
+     & \textit{image\_url} & Tautan citra tanaman yang menjadi konteks visual analisis. \\ \hline
+    \textbf{Aktual} & \textit{trace\_messages} & Riwayat lengkap langkah eksekusi (\textit{trace}) dan pemanggilan alat oleh agen. \\ \hline
+    \textbf{Referensi} & \textit{reference\_tool\_calls} & Daftar alat yang diharapkan dipanggil untuk menyelesaikan tugas secara optimal (Standar Emas). \\ \hline
     \end{tabular}
     }
 \end{table}
@@ -1053,7 +1093,7 @@ Evaluasi dilakukan dengan memberikan instruksi (\textit{prompt}) spesifik kepada
     \multirow{2}{*}{\textbf{Prinsip Desain}} & Alur Kerja & Identifikasi visual diprioritaskan, diikuti deteksi opsional, dan pencarian pengetahuan jika pengguna membutuhkan panduan pengobatan. \\ \cline{2-3}
     & Fallback & Pengalihan ke pencarian jika kepercayaan visual rendah. \\ \hline
     \multirow{2}{*}{\textbf{Aturan Semantik}} & Superset & Agen boleh memanggil alat tambahan (misal: deteksi ekstra) selama alat wajib terpenuhi. \\ \cline{2-3}
-    & Substitusi & \texttt{knowledgebase\_search} dan \texttt{web\_search} dianggap setara sebagai alat pencarian informasi. \\ \hline
+    & Substitusi & \textit{knowledgebase\_search} dan \textit{web\_search} dianggap setara sebagai alat pencarian informasi. \\ \hline
     \multirow{5}{*}{\textbf{Rubrik Skor}} & 0.0 & Alat kritis referensi tidak dipanggil sama sekali. \\ \cline{2-3}
     & 0.2 & Kehilangan beberapa alat kunci penting. \\ \cline{2-3}
     & 0.5 & Alat wajib lengkap, namun terdapat langkah tambahan yang tidak logis atau berlebihan. \\ \cline{2-3}
@@ -1081,11 +1121,11 @@ Kebutuhan data untuk evaluasi \textit{Agent Goal Accuracy} dirinci pada Tabel \r
     \begin{tabular}{|l|l|p{8cm}|}
     \hline
     \textbf{Kategori} & \textbf{Parameter} & \textbf{Deskripsi} \\ \hline
-    \multirow{2}{*}{\textbf{Input}} & \texttt{user\_text} & Instruksi atau pertanyaan teks dari pengguna. \\ \cline{2-3} 
-     & \texttt{image\_url} & Tautan citra masukan (multimodal). \\ \hline
-    \multirow{2}{*}{\textbf{Aktual}} & \texttt{final\_answer} & Jawaban akhir yang dihasilkan oleh agen. \\ \cline{2-3}
-     & \texttt{tools\_called} & Daftar alat yang dipanggil agen beserta keluarannya. \\ \hline
-    \textbf{Referensi} & \texttt{reference\_goal} & Tujuan referensi yang diharapkan (misal: identifikasi, panduan, atau penolakan). \\ \hline
+    \multirow{2}{*}{\textbf{Input}} & \textit{user\_text} & Instruksi atau pertanyaan teks dari pengguna. \\ \cline{2-3} 
+     & \textit{image\_url} & Tautan citra masukan (multimodal). \\ \hline
+    \multirow{2}{*}{\textbf{Aktual}} & \textit{final\_answer} & Jawaban akhir yang dihasilkan oleh agen. \\ \cline{2-3}
+     & \textit{tools\_called} & Daftar alat yang dipanggil agen beserta keluarannya. \\ \hline
+    \textbf{Referensi} & \textit{reference\_goal} & Tujuan referensi yang diharapkan (misal: identifikasi, panduan, atau penolakan). \\ \hline
     \end{tabular}
     }
 \end{table}
@@ -1101,7 +1141,7 @@ Desain evaluator ini mencakup kriteria, langkah evaluasi, dan rubrik penilaian y
     \begin{tabular}{|l|p{10cm}|}
     \hline
     \textbf{Komponen} & \textbf{Rincian} \\ \hline
-    \textbf{Kriteria} & Evaluasi keberhasilan agen mencapai \texttt{reference\_goal} berdasarkan output aktual dan penggunaan alat. Penilaian mencakup aspek identifikasi penyakit, panduan manajemen, analisis gejala, ekspresi ketidakpastian, dan penolakan permintaan di luar jangkauan. \\ \hline
+    \textbf{Kriteria} & Evaluasi keberhasilan agen mencapai \textit{reference\_goal} berdasarkan output aktual dan penggunaan alat. Penilaian mencakup aspek identifikasi penyakit, panduan manajemen, analisis gejala, ekspresi ketidakpastian, dan penolakan permintaan di luar jangkauan. \\ \hline
     \textbf{Langkah Evaluasi} & \begin{enumerate}[nosep, leftmargin=*]
         \item Ekstrak tujuan referensi dari data yang diharapkan.
         \item Identifikasi tujuan utama (identifikasi, pengobatan, atau penolakan).
@@ -1137,10 +1177,10 @@ Tabel \ref{tab:faithfulness_data_requirements} menyajikan komponen data yang dig
     \begin{tabular}{|l|l|p{8cm}|}
     \hline
     \textbf{Kategori} & \textbf{Parameter} & \textbf{Deskripsi} \\ \hline
-    \multirow{2}{*}{\textbf{Input}} & \texttt{user\_text} & Pertanyaan atau instruksi teks dari pengguna. \\ \cline{2-3} 
-     & \texttt{image\_url} & Tautan citra tanaman sebagai dasar validasi observasi visual agen. \\ \hline
-    \multirow{2}{*}{\textbf{Aktual}} & \texttt{final\_answer} & Jawaban akhir yang dihasilkan oleh agen. \\ \cline{2-3}
-     & \texttt{retrieval\_context} & Kumpulan potongan informasi teks yang diekstraksi dari keluaran seluruh alat (pencarian, deteksi, dan klasifikasi). \\ \hline
+    \multirow{2}{*}{\textbf{Input}} & \textit{user\_text} & Pertanyaan atau instruksi teks dari pengguna. \\ \cline{2-3} 
+     & \textit{image\_url} & Tautan citra tanaman sebagai dasar validasi observasi visual agen. \\ \hline
+    \multirow{2}{*}{\textbf{Aktual}} & \textit{final\_answer} & Jawaban akhir yang dihasilkan oleh agen. \\ \cline{2-3}
+     & \textit{retrieval\_context} & Kumpulan potongan informasi teks yang diekstraksi dari keluaran seluruh alat (pencarian, deteksi, dan klasifikasi). \\ \hline
     \end{tabular}
     }
 \end{table}
@@ -1159,7 +1199,7 @@ Desain evaluator \textit{Faithfulness} mencakup kriteria penilaian yang spesifik
     \textbf{Kriteria} & Evaluasi kesetiaan (\textit{faithfulness}) respons terhadap bukti dengan mempertimbangkan kapabilitas agen: \newline
     1. \textbf{Observasi Visual}: Agen HARUS melakukan observasi dari gambar (valid tanpa pencarian). \newline
     2. \textbf{Saran Umum}: Agen DAPAT memberikan praktik terbaik umum (sanitasi, isolasi) tanpa pencarian. \newline
-    3. \textbf{Klaim Spesifik}: Identifikasi penyakit, nama patogen, dan pengobatan kimiawi HARUS didasarkan pada \texttt{retrieval\_context}. \newline
+    3. \textbf{Klaim Spesifik}: Identifikasi penyakit, nama patogen, dan pengobatan kimiawi HARUS didasarkan pada \textit{retrieval\_context}. \newline
     4. \textbf{Ketidakpastian}: Agen HARUS menyatakan ketidakpastian jika bukti terbatas. \\ \hline
     \textbf{Langkah Evaluasi} & \begin{enumerate}[nosep, leftmargin=*]
         \item Identifikasi observasi visual dan rekomendasi umum dalam output.
@@ -1199,27 +1239,14 @@ Kebutuhan data untuk menjalankan evaluasi \textit{Context Relevance} dirangkum p
     \begin{tabular}{|l|l|p{8cm}|}
     \hline
     \textbf{Kategori} & \textbf{Parameter} & \textbf{Deskripsi} \\ \hline
-    \multirow{2}{*}{\textbf{Input}} & \texttt{user\_text} & Teks pertanyaan atau instruksi dari pengguna. \\ \cline{2-3} 
-     & \texttt{image\_url} & Tautan citra tanaman. Jika tersedia, indikator visual ditambahkan ke \textit{prompt} evaluator untuk konteks. \\ \hline
-    \textbf{Aktual} & \texttt{retrieved\_contexts} & Daftar potongan teks yang diekstraksi dari riwayat pemanggilan alat (\textit{trace}), mencakup hasil pencarian dokumen maupun deteksi. \\ \hline
+    \multirow{2}{*}{\textbf{Input}} & \textit{user\_text} & Teks pertanyaan atau instruksi dari pengguna. \\ \cline{2-3} 
+     & \textit{image\_url} & Tautan citra tanaman. Jika tersedia, indikator visual ditambahkan ke \textit{prompt} evaluator untuk konteks. \\ \hline
+    \textbf{Aktual} & \textit{retrieved\_contexts} & Daftar potongan teks yang diekstraksi dari riwayat pemanggilan alat (\textit{trace}), mencakup hasil pencarian dokumen maupun deteksi. \\ \hline
     \end{tabular}
     }
 \end{table}
 
-\subsection{Pengujian Multi-Tahap}
-Pengujian multi-tahap dalam penelitian ini difokuskan pada eksperimen Batasan Domain (\textit{Domain Boundary}). Eksperimen ini bertujuan untuk menguji ketahanan sistem dalam menjaga konsistensi peran dan relevansi topik selama interaksi percakapan yang berlangsung dalam beberapa giliran (\textit{multi-turn}). Pengujian ini diorkestrasi menggunakan fitur simulasi interaksi dari platform LangSmith, di mana agen dihadapkan dengan "pengguna simulasi" (\textit{simulated user}) yang dijalankan oleh LLM lain dengan instruksi persona tertentu. Pendekatan ini memungkinkan evaluasi yang dinamis terhadap respons agen saat menghadapi berbagai skenario percakapan yang berkembang.
-
-\subsubsection{Persiapan Data}
-Persiapan data dilakukan dengan menyusun dataset yang berisi 10 contoh skenario interaksi. Setiap skenario dilengkapi dengan pesan awal pengguna dan instruksi sistem untuk pengguna simulasi guna membentuk persona yang spesifik. Variasi persona yang digunakan dalam pengujian ini dikelompokkan sebagai berikut:
-
-\begin{enumerate}[nosep]
-    \item \textit{On-topic Personas}: Persona pengguna yang mengajukan pertanyaan relevan mengenai kesehatan tanaman, baik disertai bukti visual maupun teks saja. Contoh persona ini meliputi Petani Tomat, Penghobi Mawar, dan Petani Cabai.
-    \item \textit{Off-topic Personas}: Persona pengguna yang secara eksplisit meminta bantuan di luar domain keahlian agen. Contohnya mencakup pemilik mobil yang meminta saran mekanis, investor yang menanyakan harga saham, dan pertanyaan medis terkait kesehatan manusia.
-    \item \textit{Edge Cases}: Skenario batas yang menguji kemampuan diskriminasi visual agen, seperti pengguna yang mengirimkan foto tanaman artifisial atau objek hewan (misalnya kucing) untuk melihat apakah agen dapat membedakan objek non-tanaman.
-    \item \textit{Context Switchers}: Persona yang dirancang untuk menguji fleksibilitas agen dalam menangani perpindahan topik. Kategori ini mencakup perpindahan dari topik tanaman ke topik lain (\textit{On-to-Off}) untuk menguji ketegasan agen, serta perpindahan dari topik umum ke topik tanaman (\textit{Off-to-On}) untuk menguji responsivitas agen terhadap pertanyaan valid setelah penolakan awal.
-\end{enumerate}
-
-\subsubsection{Evaluasi}
+\subsubsection{Evaluasi Pengujian Multi-Tahap}
 Evaluasi kinerja agen pada pengujian ini dilakukan menggunakan metrik kustom bernama \textit{Domain Adherence} ($M_{dad}$). Metrik ini merupakan implementasi dari pendekatan \textit{LLM-as-a-judge} yang dibangun menggunakan pustaka OpenEval dari LangSmith. Metrik ini bersifat juga \textit{self-explaining}, di mana evaluator tidak hanya memberikan skor penilaian tetapi juga menyertakan alasan kualitatif yang mendasari skor tersebut.
 
 Evaluator bekerja dengan menganalisis riwayat percakapan lengkap (\textit{trajectory}) antara agen dan pengguna simulasi. Penilaian dilakukan berdasarkan instruksi (\textit{prompt}) evaluasi yang menginstruksikan model juri untuk memberikan skor tinggi jika agen berhasil menjawab pertanyaan terkait tanaman dan menolak permintaan di luar domain secara sopan. Sebaliknya, skor rendah diberikan jika agen gagal mempertahankan batasan domainnya. \textit{Prompt} yang digunakan oleh evaluator dalam metrik ini disajikan pada Gambar \ref{fig:prompt_domain_adherence}.
@@ -1231,5 +1258,5 @@ Evaluator bekerja dengan menganalisis riwayat percakapan lengkap (\textit{trajec
     \label{fig:prompt_domain_adherence}
 \end{figure}
 
-\section{Analisis dan Pembahasan}
+\section{Penyampaian Hasil}
 Hasil penelitian yang telah dilaksanakan dianalisis dan dibahas dalam bentuk laporan tertulis berupa skripsi. Laporan ini mencakup perancangan arsitektur sistem agentik, implementasi teknis, serta hasil evaluasi kinerja sistem menggunakan pendekatan \textit{LLM-as-a-judge}. Pembahasan dalam laporan meliputi integrasi model deteksi objek tanaman menggunakan YOLOv11 dan OWLv2, modul pencarian multimodal berbasis SCOLD, serta pengembangan agen cerdas dengan pola ReAct yang memanfaatkan mekanisme \textit{Retrieval-Augmented Generation} (RAG). Laporan ini diharapkan dapat memberikan kontribusi terhadap pengembangan teknologi identifikasi penyakit tanaman yang lebih adaptif dan fleksibel. Selain itu, penelitian ini juga dapat menjadi rujukan dalam penerapan teknologi sistem agentik dan kecerdasan buatan multimodal di bidang pertanian untuk membantu pengelolaan kesehatan tanaman.

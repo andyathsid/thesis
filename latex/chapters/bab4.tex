@@ -7,7 +7,7 @@ Hasil kompilasi dari definisi graf agen disajikan pada Gambar \ref{fig:compiled_
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{bab4/compiledstategraph.png}
+    \includegraphics[width=0.4\textwidth]{bab4/compiledstategraph.png}
     \caption{Representasi graf sistem agentik setelah proses kompilasi}
     \label{fig:compiled_state_graph}
 \end{figure}
@@ -96,6 +96,7 @@ Agen juga dilengkapi dengan kebijakan penggunaan alat (\textit{Tool Decision Pol
         node distance=0.8cm,
         font=\small,
         start/.style={circle, draw, fill=blue!10, minimum size=1cm, align=center},
+        stop/.style={ellipse, draw, fill=green!10, minimum height=1cm, align=center},
         process/.style={rectangle, draw, fill=white, minimum width=3cm, minimum height=0.8cm, align=center, text width=3cm},
         decision/.style={rounded rectangle, draw, fill=blue!10, minimum width=2.5cm, minimum height=0.8cm, align=center, text width=2.5cm},
         arrow/.style={-stealth, thick}
@@ -121,7 +122,7 @@ Agen juga dilengkapi dengan kebijakan penggunaan alat (\textit{Tool Decision Pol
         \node [decision, below=1.2cm of reliable] (guide) {Butuh Panduan?};
         \node [process, left=1.2cm of guide] (kb) {Pencarian KB/Web};
         
-        \node [start, below=of guide] (end) {Respons Akhir};
+        \node [stop, below=of guide] (end) {Selesai: Respons Akhir};
 
         % Edges
         \draw [arrow] (start) -- (quality);
@@ -162,6 +163,7 @@ Selain kebijakan penggunaan alat, agen juga mematuhi aturan kebenaran ketat (\te
         node distance=0.8cm,
         font=\small,
         start/.style={circle, draw, fill=blue!10, minimum size=1cm, align=center},
+        stop/.style={ellipse, draw, fill=green!10, minimum height=1cm, align=center},
         process/.style={rectangle, draw, fill=white, minimum width=3.5cm, minimum height=0.8cm, align=center, text width=3.5cm},
         decision/.style={rounded rectangle, draw, fill=blue!10, minimum width=2.5cm, minimum height=0.8cm, align=center, text width=2.5cm},
         arrow/.style={-stealth, thick}
@@ -181,7 +183,7 @@ Selain kebijakan penggunaan alat, agen juga mematuhi aturan kebenaran ketat (\te
         
         \node [process, below=1.2cm of guide] (const) {Terapkan Batasan: Hipotesis Kecil \& Tanpa Skor Palsu};
         
-        \node [start, below=of const] (end) {Respons Jujur \& Aman};
+        \node [stop, below=of const] (end) {Selesai: Respons Jujur \& Aman};
 
         % Edges
         \draw [arrow] (start) -- (triage);
