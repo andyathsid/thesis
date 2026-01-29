@@ -664,7 +664,7 @@ Berikut adalah metrik-metrik yang digunakan dalam evaluasi:
 \end{enumerate}
 
 \subsubsection{Alat Pencarian Internet}
-Alat pencarian internet diimplementasikan menggunakan Tavily Search API. Tavily merupakan mesin pencari yang dioptimasi khusus untuk sistem agentik (\textit{agentic systems}) dengan tujuan memberikan hasil pencarian yang efisien, cepat, dan konsisten \parencite{TavilyaiTavilypython2026}. Penggunaan API ini memungkinkan sistem untuk mengabstraksi serangkaian proses kompleks dalam pengambilan informasi daring, yang mencakup pencarian, \textit{web scraping}, penyaringan konten, pemeringkatan ulang (\textit{re-ranking}), hingga ekstraksi informasi yang paling relevan secara otomatis.
+Alat pencarian internet diimplementasikan menggunakan Tavily Search API. Tavily merupakan mesin pencari yang dioptimasi khusus untuk sistem agentik (\textit{agentic systems}) dengan tujuan memberikan hasil pencarian yang efisien, cepat, dan konsisten \parencite{tavilyaiTavilyaiTavilypython2026}. Penggunaan API ini memungkinkan sistem untuk mengabstraksi serangkaian proses kompleks dalam pengambilan informasi daring, yang mencakup pencarian, \textit{web scraping}, penyaringan konten, pemeringkatan ulang (\textit{re-ranking}), hingga ekstraksi informasi yang paling relevan secara otomatis.
 
 Konfigurasi parameter yang digunakan dalam inisialisasi alat pencarian ini dirinci pada Tabel \ref{tab:tavily_parameters}. Parameter \texttt{max\_results} diatur untuk mengembalikan lima dokumen teratas guna memberikan variasi sumber informasi yang cukup bagi agen. Topik pencarian diatur ke "general" untuk memastikan cakupan sumber yang luas. Selain itu, fitur pencarian gambar diaktifkan untuk memperkaya konteks visual yang dapat diberikan kepada pengguna.
 
@@ -783,12 +783,12 @@ Gambar \ref{fig:prototipe_antarmuka} memperlihatkan tampilan utama dari prototip
 \end{figure}
 
 \subsubsection{Pengujian Antarmuka}
-Pengujian antarmuka dilakukan menggunakan metode \textit{Black Box Testing} untuk memastikan bahwa seluruh fungsionalitas yang telah dirancang pada \textit{Use Case Diagram} dapat beroperasi sesuai dengan ekspektasi pengguna. textit{Black Box Testing} merupakan metode pengujian perangkat lunak yang berfokus pada spesifikasi fungsional sistem \parencite{bhasinBlackBoxTesting2014}. Pengujian fungsionalitas antarmuka dirangkum dalam Tabel \ref{tab:black_box_testing}.
+Pengujian antarmuka dilakukan menggunakan metode \textit{Black Box Testing} untuk memastikan bahwa seluruh fungsionalitas yang telah dirancang pada \textit{Use Case Diagram} dapat beroperasi sesuai dengan ekspektasi pengguna. textit{Black Box Testing} merupakan metode pengujian perangkat lunak yang berfokus pada spesifikasi fungsional sistem \parencite{bhasinBlackBoxTesting2014}. Pengujian fungsionalitas antarmuka dirangkum dalam Tabel \ref{tab:black_box_testing_expected}.
 
 \begin{table}[H]
     \centering
     \caption{Pengujian \textit{Black Box} Antarmuka Sistem Agentik}
-    \label{tab:black_box_testing}
+    \label{tab:black_box_testing_expected}
     \small
     \setstretch{1.0}
     \resizebox{\textwidth}{!}{
