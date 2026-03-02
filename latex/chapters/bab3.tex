@@ -3,7 +3,7 @@
 \section{Desain Penelitian}
 Penelitian ini dilakukan dengan mengadopsi metode \textit{Design and Development} (D\&D) yang dirumuskan oleh \textcite{ellisGuideNoviceResearchers2010}. Metode D\&D didefinisikan sebagai pendekatan sistematis untuk merancang, mengembangkan, dan mengevaluasi suatu produk atau sistem (artefak) sebagai solusi atas permasalahan yang spesifik. Berbeda dengan metode penelitian tradisional yang umumnya berfokus pada pengujian hipotesis atau observasi fenomena, penelitian D\&D menempatkan pengembangan artefak teknologi itu sendiri sebagai kontribusi utama terhadap khazanah pengetahuan. Tujuan utamanya adalah untuk menjembatani kesenjangan antara landasan teoritis dan implementasi praktis melalui penciptaan solusi yang dapat diuji validitas dan efektivitasnya.
 
-Metode ini dipilih karena kesesuaiannya dengan karakteristik penelitian ini yang berfokus pada pengembangan prototipe sistem agentik. Pendekatan D\&D menyediakan kerangka kerja yang terstruktur untuk memandu proses teknis mulai dari konseptualisasi hingga validasi sistem. Hal ini dinilai relevan mengingat luaran penelitian masih terbatas dalam bentuk prototipe yang berhenti pada tahap validasi fungsional dan kinerja, sehingga diperlukan metodologi yang menekankan pada iterasi desain dan pembuktian konsep (\textit{proof of concept}). Tahapan pelaksanaan penelitian mengacu pada enam fase dalam model D\&D, yaitu: (1) identifikasi masalah, (2) deskripsi tujuan, (3) perancangan dan pengembangan, (4) pengujian, (5) evaluasi, dan (6) penyampaian hasil. Alur tahapan tersebut divisualisasikan pada Gambar \ref{fig:dnd}.
+Metode ini dipilih karena kesesuaiannya dengan karakteristik penelitian ini yang berfokus pada pengembangan prototipe sistem agentik. Menurut \textcite{ellisGuideNoviceResearchers2010}, pendekatan D\&D menyediakan kerangka kerja yang terstruktur untuk memandu proses teknis mulai dari konseptualisasi hingga validasi sistem. Hal ini dinilai relevan mengingat luaran penelitian masih terbatas dalam bentuk prototipe yang berhenti pada tahap validasi fungsional dan kinerja, sehingga diperlukan metodologi yang menekankan pada iterasi desain dan pembuktian konsep (\textit{proof of concept}). Tahapan pelaksanaan penelitian mengacu pada enam fase dalam model D\&D, yaitu identifikasi masalah, deskripsi tujuan, perancangan dan pengembangan, pengujian, evaluasi, dan penyampaian hasil. Alur tahapan tersebut divisualisasikan pada Gambar \ref{fig:dnd}.
 
 \begin{figure}[H] 
     \centering
@@ -13,49 +13,47 @@ Metode ini dipilih karena kesesuaiannya dengan karakteristik penelitian ini yang
 \end{figure}
 
 \section{Identifikasi Masalah}
-Identifikasi masalah dalam penelitian ini berawal dari tantangan nyata yang dihadapi dalam diagnosis penyakit tanaman di lapangan. Ketergantungan pada tenaga ahli patologi tumbuhan yang jumlahnya terbatas menyebabkan akses terhadap diagnosis yang akurat menjadi sulit bagi sebagian besar petani dan praktisi pertanian. Di sisi lain, metode pengamatan visual secara manual bersifat subjektif dan rentan terhadap kesalahan, khususnya ketika menghadapi gejala penyakit yang memiliki kemiripan karakteristik visual antarjenis. Meskipun teknologi kecerdasan buatan, khususnya \textit{computer vision}, telah diterapkan untuk otomasi deteksi, solusi yang ada seringkali hanya menghasilkan label klasifikasi sederhana tanpa disertai penjelasan kausalitas atau konteks yang mendalam. Hal ini menciptakan kesenjangan informasi yang menghambat pengguna dalam memahami kondisi tanaman dan mengambil tindakan pengendalian yang tepat.
 
-Untuk mengatasi permasalahan tersebut, dibutuhkan suatu sistem yang tidak hanya memiliki kemampuan persepsi visual untuk lokalisasi dan identifikasi penyakit, tetapi juga kemampuan kognitif untuk memberikan penjelasan yang argumentatif dan berbasis bukti. Penelitian ini mengusulkan pendekatan sistem agentik multimodal yang mengintegrasikan model deteksi objek mutakhir seperti YOLOv11 dan OWLv2 dengan agen LLM yang diperkuat oleh mekanisme \textit{Retrieval-Augmented Generation} (RAG). Integrasi ini bertujuan untuk menghadirkan asisten cerdas yang mampu melakukan diagnosis penyakit tanaman secara interaktif, akurat, dan transparan. Dalam merealisasikan sistem dengan kompleksitas tersebut, diperlukan dukungan infrastruktur komputasi dan perangkat lunak yang spesifik. Rincian perangkat keras dan perangkat lunak yang digunakan untuk mendukung seluruh tahapan penelitian ini dirangkum pada Tabel \ref{tab:perangkat_pendukung}.
 
-\begin{table}[H]
-    \centering
-    \caption{Perangkat Pendukung Penelitian}
-    \label{tab:perangkat_pendukung}
-    \small
-    \setstretch{1.0}
-    \begin{tabular}{|c|l|p{9cm}|}
-    \hline
-    \multicolumn{3}{|c|}{\textbf{Spesifikasi Laptop}} \\ \hline
-    \textbf{No.} & \textbf{Komponen} & \textbf{Spesifikasi} \\ \hline
-    1. & Prosesor & AMD Ryzen™ 7 7840HS \\ \hline
-    2. & Memori & 16 GB DDR5-5600 \\ \hline
-    3. & Grafik & NVIDIA® GeForce RTX™ 4060 8GB \\ \hline
-    \multicolumn{3}{|c|}{\textbf{Perangkat Lunak}} \\ \hline
-    \textbf{No.} & \textbf{Nama} & \textbf{Fungsi} \\ \hline
-    1. & WSL2 & Subsistem Linux untuk Windows sebagai lingkungan pengembangan sistem agentik. \\ \hline
-    2. & Docker & Platform kontainerisasi aplikasi. \\ \hline
-    3. & uv & Manajer library dan virtual environtment untuk Python. \\ \hline
-    4. & Next.js & Framework aplikasi web. \\ \hline
-    5. & LangChain & Framework pengembangan aplikasi LLM. \\ \hline
-    6. & LangGraph & Framework untuk pengembangan sistem agentik. \\ \hline
-    7. & LangSmith & Platform monitoring dan evaluasi LLM. \\ \hline
-    8. & AgentEval & Library evaluasi sistem agentik dari LangSmith. \\ \hline
-    9. & DeepEval & Library penyedia metrik evaluasi LLM-as-a-judge untuk sistem agentik. \\ \hline
-    10. & RAGAS & Library penyedia metrik evaluasi LLM-as-a-judge untuk RAG. \\ \hline
-    11. & Qdrant & Basis data vektor untuk pencarian semantik. \\ \hline
-    12. & Google Gen AI & Layanan penyedia API model bahasa Gemini. \\ \hline
-    13. & Voyage AI & Layanan penyedia API model embedding dan reranker. \\ \hline
-    14. & Kaggle Kernel & Platform komputasi untuk pelatihan model. \\ \hline
-    15. & Supabase & Layanan penyedia penyimpanan data. \\ \hline
-    16. & Cloudflare R2 & Layanan penyedia penyimpanan objek. \\ \hline
-    17. & FastEmbed & Library inferensi model embedding untuk RAG. \\ \hline
-    18. & LlamaIndex & Framework untuk pengembangan RAG. \\ \hline
-    19. & Playwright & Framework untuk automasi web untuk \textit{crawling}. \\ \hline
-    20. & ScrapeGraphAI & Library untuk ekstraksi data web berbasis LLM. \\ \hline
-    21. & Google Cloud Run & Layanan deployment cloud container . \\ \hline
-    22. & Vercel & Layanan hosting aplikasi web. \\ \hline
-    \end{tabular}
-\end{table}
+% \begin{table}[H]
+%     \centering
+%     \caption{Perangkat Pendukung Penelitian}
+%     \label{tab:perangkat_pendukung}
+%     \small
+%     \setstretch{1.0}
+%     \begin{tabular}{|c|l|p{9cm}|}
+%     \hline
+%     \multicolumn{3}{|c|}{\textbf{Spesifikasi Laptop}} \\ \hline
+%     \textbf{No.} & \textbf{Komponen} & \textbf{Spesifikasi} \\ \hline
+%     1. & Prosesor & AMD Ryzen™ 7 7840HS \\ \hline
+%     2. & Memori & 16 GB DDR5-5600 \\ \hline
+%     3. & Grafik & NVIDIA® GeForce RTX™ 4060 8GB \\ \hline
+%     \multicolumn{3}{|c|}{\textbf{Perangkat Lunak}} \\ \hline
+%     \textbf{No.} & \textbf{Nama} & \textbf{Fungsi} \\ \hline
+%     1. & WSL2 & Subsistem Linux untuk Windows sebagai lingkungan pengembangan sistem agentik. \\ \hline
+%     2. & Docker & Platform kontainerisasi aplikasi. \\ \hline
+%     3. & uv & Manajer library dan virtual environtment untuk Python. \\ \hline
+%     4. & Next.js & Framework aplikasi web. \\ \hline
+%     5. & LangChain & Framework pengembangan aplikasi LLM. \\ \hline
+%     6. & LangGraph & Framework untuk pengembangan sistem agentik. \\ \hline
+%     7. & LangSmith & Platform monitoring dan evaluasi LLM. \\ \hline
+%     8. & AgentEval & Library evaluasi sistem agentik dari LangSmith. \\ \hline
+%     9. & DeepEval & Library penyedia metrik evaluasi LLM-as-a-judge untuk sistem agentik. \\ \hline
+%     10. & RAGAS & Library penyedia metrik evaluasi LLM-as-a-judge untuk RAG. \\ \hline
+%     11. & Qdrant & Basis data vektor untuk pencarian semantik. \\ \hline
+%     12. & Google Gen AI & Layanan penyedia API model bahasa Gemini. \\ \hline
+%     13. & Voyage AI & Layanan penyedia API model embedding dan reranker. \\ \hline
+%     14. & Kaggle Kernel & Platform komputasi untuk pelatihan model. \\ \hline
+%     15. & Supabase & Layanan penyedia penyimpanan data. \\ \hline
+%     16. & Cloudflare R2 & Layanan penyedia penyimpanan objek. \\ \hline
+%     17. & FastEmbed & Library inferensi model embedding untuk RAG. \\ \hline
+%     18. & LlamaIndex & Framework untuk pengembangan RAG. \\ \hline
+%     19. & Playwright & Framework untuk automasi web untuk \textit{crawling}. \\ \hline
+%     20. & ScrapeGraphAI & Library untuk ekstraksi data web berbasis LLM. \\ \hline
+%     21. & Google Cloud Run & Layanan deployment cloud container . \\ \hline
+%     22. & Vercel & Layanan hosting aplikasi web. \\ \hline
+%     \end{tabular}
+% \end{table}
 
 \section{Deskripsi Tujuan}
 Berdasarkan identifikasi masalah yang telah diuraikan, tujuan utama dari penelitian ini adalah mengembangkan sistem agentik multimodal yang mampu mengidentifikasi penyakit tanaman serta memberikan penjelasan diagnosis yang berbasis bukti. Sistem ini dirancang sebagai solusi untuk mengatasi keterbatasan metode identifikasi konvensional yang kurang adaptif. Secara rinci, tujuan pengembangan dalam penelitian ini dijabarkan sebagai berikut:
@@ -371,7 +369,9 @@ Implementasi alat pencarian basis data pengetahuan diawali dengan pemilihan komp
 
 Akan tetapi, hasil yang berbeda ditunjukkan pada \textit{Semantic Alignment \& Generalization Evaluation} (SAGE) oleh \textcite{goelSAGERealisticBenchmark2025}. Pada tolok ukur ini, model \textit{text-embedding-3-large} menempati posisi terbaik dengan skor keseluruhan SAGE sebesar 0,524, sedangkan \textit{gemini-embedding-001} berada di peringkat ketiga dengan skor 0,504.
 
-Mengingat adanya perbedaan hasil evaluasi tersebut, dilakukan \textit{benchmarking} internal menggunakan korpus data yang akan digunakan pada sistem untuk menentukan konfigurasi model yang paling sesuai dengan karakteristik data penyakit tanaman yang digunakan. Pengujian difokuskan pada konfigurasi \textit{hybrid search} yang menggabungkan pencarian vektor padat (\textit{dense vector}) dan vektor jarang (\textit{sparse vector}). Untuk komponen vektor jarang, digunakan dua pendekatan populer yaitu BM25 dari \textcite{robertsonProbabilisticRelevanceFramework2009} melalui Qdrant dan SPLADE dari \textcite{formalSPLADESparseLexical2021} melalui FastEmbed. Kombinasi pengujian mencakup empat variasi konfigurasi \textit{hybrid search}, yaitu (1) \textit{text-embedding-3-large} dengan BM25, (2) \textit{text-embedding-3-large} dengan SPLADE, (3) \textit{gemini-embedding-001} dengan BM25, dan (4) \textit{gemini-embedding-001} dengan SPLADE. Konfigurasi \textit{hybrid search} terbaik selanjutnya akan diuji lebih lanjut untuk mengevaluasi efektivitas komponen \textit{reranker}. Pengujian ini bertujuan untuk membandingkan kinerja antara model \textit{reranking} berbasis \textit{cross-encoder} dan \textit{late interaction}. Sebagai representasi model \textit{cross-encoder}, dipilih model \textit{rerank-2.5} dari Voyage AI. Sementara itu, untuk pendekatan \textit{late interaction}, digunakan model \textit{jina-colbert-v2} dari Jina AI \parencite{jhaJinaColBERTv2GeneralPurposeMultilingual2024} yang diimplementasikan melalui pustaka FastEmbed. Perbandingan ini dilakukan untuk mendapatkan konfigurasi \textit{Retrieval-Augmented Generation} (RAG) yang paling optimal sebelum diimplementasikan ke sistem agentik. Alur pengujian komponen pencarian ini divisualisasikan pada Gambar \ref{fig:alur_pengujian_retrieval}.
+Mengingat adanya perbedaan hasil evaluasi pada berbagai tolok ukur standar tersebut, diputuskan untuk melakukan \textit{benchmarking} internal menggunakan korpus data yang akan digunakan secara riil pada sistem. Pendekatan ini diambil guna menentukan konfigurasi model yang paling sesuai dengan karakteristik unik dari data penyakit tanaman yang dikelola. Pengujian secara khusus difokuskan pada konfigurasi \textit{hybrid search}, sebuah metode yang menggabungkan keunggulan pencarian vektor padat (\textit{dense vector}) untuk menangkap konteks semantik dan vektor jarang (\textit{sparse vector}) untuk pencocokan kata kunci yang presisi. Pada komponen vektor jarang, dua pendekatan yang diuji adalah algoritma BM25 dari \textcite{robertsonProbabilisticRelevanceFramework2009} yang berbasis frekuensi kata dan tersedia di Qdrant, serta model SPLADE dari \textcite{formalSPLADESparseLexical2021} yang berbasis pembelajaran mesin dan dijalankan melalui FastEmbed. Kombinasi pengujian ini dirancang untuk mencakup empat variasi konfigurasi \textit{hybrid search}, yaitu: (1) \textit{text-embedding-3-large} yang dipadukan dengan BM25, (2) \textit{text-embedding-3-large} dengan SPLADE, (3) \textit{gemini-embedding-001} dengan BM25, dan (4) \textit{gemini-embedding-001} dengan SPLADE.
+
+Konfigurasi \textit{hybrid search} yang menunjukkan kinerja terbaik selanjutnya akan dibawa ke tahap pengujian lanjutan untuk mengevaluasi efektivitas penambahan komponen \textit{reranker}. Pengujian pada tahap ini bertujuan untuk membandingkan kinerja antara dua arsitektur model \textit{reranking} yang berbeda, yakni model berbasis \textit{cross-encoder} dan model dengan pendekatan \textit{late interaction}. Sebagai representasi dari model \textit{cross-encoder}, dipilih model \textit{rerank-2.5} dari Voyage AI yang memproses kueri dan dokumen secara bersamaan untuk akurasi tinggi. Sementara itu, untuk pendekatan \textit{late interaction}, digunakan model \textit{jina-colbert-v2} dari Jina AI \parencite{jhaJinaColBERTv2GeneralPurposeMultilingual2024} yang diimplementasikan melalui pustaka FastEmbed. Perbandingan ini dilakukan untuk memastikan diperolehnya konfigurasi \textit{Retrieval-Augmented Generation} (RAG) yang paling optimal dan andal sebelum diimplementasikan sepenuhnya ke dalam sistem agentik. Keseluruhan alur pengujian komponen pencarian ini, mulai dari pemilihan strategi pencarian hingga pemeringkatan ulang, divisualisasikan secara rinci pada Gambar \ref{fig:alur_pengujian_retrieval}.
 
 \begin{figure}[H]
     \centering
@@ -541,10 +541,7 @@ Pada tahap pencarian hibrida, sistem dikonfigurasi agar agen LLM dapat melakukan
     score(d \in D) = \sum_{r_d \in R(d)} \frac{1}{k + r_d}
     \label{eq:rrf}
 \end{equation}
-
-\noindent di mana $D$ adalah himpunan dokumen hasil, $R(d)$ adalah himpunan peringkat dokumen $d$, dan $k$ adalah konstanta peredam.
-
-Dokumen yang telah digabungkan melalui RRF kemudian diproses lebih lanjut oleh komponen \textit{reranker}. Komponen ini mengevaluasi ulang relevansi semantik antara kueri dan dokumen kandidat untuk menghasilkan urutan akhir yang lebih akurat. Dari proses ini, hanya $k$ dokumen teratas yang diambil dan disajikan kepada agen sebagai konteks informasi. Visualisasi alur kerja strategi pencarian ini dapat dilihat pada Gambar \ref{fig:knowledge_base_search_workflow}.
+    \daftarpersamaan{Reciprocal Rank Fusion (RRF)}
 
 \begin{figure}[H]
     \centering
@@ -740,7 +737,7 @@ Dataset OOD disusun untuk menguji ketangguhan (\textit{robustness}) dan kemampua
     4. & Okra & 6 & \textcite{kumarakuruOkraDiseaseNetDataset2024} \\ \hline
     5. & Lobak & 5 & \textcite{rashidImageDatasetRadish2024} \\ \hline
     6. & Jambu Biji & 7 & \textcite{shihabImageDatasetDetection2024} \\ \hline
-    7. & Gandum & 3 & \textcite{getachewWheatLeafDataset2021c} \\ \hline
+    7. & Gandum & 3 & \textcite{getachewWheatLeafDataset2021} \\ \hline
     8. & Bawang Bombay & 4 & \textcite{mpOnionDataset2024} \\ \hline
     \multicolumn{2}{|c|}{\textbf{Total}} & \textbf{40} & - \\ \hline
     \end{tabular}
@@ -870,30 +867,35 @@ Evaluasi model deteksi dilakukan untuk mengukur ketepatan lokalisasi dan klasifi
         IoU = \frac{Area(BB_{pred} \cap BB_{gt})}{Area(BB_{pred} \cup BB_{gt})}
         \label{eq:iou}
     \end{equation}
+    \daftarpersamaan{Intersection over Union (IoU)}
 
     \item Precision: Rasio prediksi positif yang benar terhadap total prediksi positif. Metrik ini mengindikasikan tingkat kepercayaan terhadap prediksi model, yakni seberapa sering model benar ketika menyatakan mendeteksi daun dan meminimalkan deteksi palsu, sebagaimana dirumuskan pada Persamaan \ref{eq:precision}.
     \begin{equation}
         Precision = \frac{TP}{TP + FP}
         \label{eq:precision}
     \end{equation}
+    \daftarpersamaan{Precision}
 
     \item Recall: Rasio prediksi positif yang benar terhadap total sampel positif aktual. Metrik ini mengukur sensitivitas model, yakni kemampuannya untuk menemukan seluruh objek daun yang ada dalam citra dan meminimalkan objek yang terlewat, seperti yang dinyatakan dalam Persamaan \ref{eq:recall}.
     \begin{equation}
         Recall = \frac{TP}{TP + FN}
         \label{eq:recall}
     \end{equation}
+    \daftarpersamaan{Recall}
 
     \item F1-score: Rata-rata harmonis antara \textit{precision} dan \textit{recall}. Metrik ini memberikan gambaran keseimbangan performa model, memastikan model tidak hanya berhati-hati dalam mendeteksi tetapi juga mampu menemukan objek sebanyak mungkin, yang dihitung menggunakan Persamaan \ref{eq:f1}.
     \begin{equation}
         F1 = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}
         \label{eq:f1}
     \end{equation}
+    \daftarpersamaan{F1-score}
 
     \item mAP (\textit{mean Average Precision}): Rata-rata \textit{Average Precision} (AP) di seluruh kelas. Metrik ini merupakan standar evaluasi menyeluruh yang merepresentasikan keandalan model pada berbagai tingkat ambang batas deteksi, sebagaimana didefinisikan pada Persamaan \ref{eq:map}.
     \begin{equation}
         mAP = \frac{1}{N} \sum_{i=1}^{N} AP_i
         \label{eq:map}
     \end{equation}
+    \daftarpersamaan{Mean Average Precision (mAP)}
 \end{enumerate}
 
 Selain metrik akurasi, evaluasi performa waktu atau latensi inferensi dilakukan untuk mengukur efisiensi model saat dijalankan pada perangkat dengan sumber daya terbatas. Pengukuran latensi dilakukan melalui prosedur \textit{benchmarking} yang dirancang untuk mensimulasikan kondisi penggunaan nyata. Proses ini diawali dengan mengekspor model ke format ONNX (\textit{Open Neural Network Exchange}) dan dijalankan menggunakan \textit{engine} ONNX Runtime dengan penyedia eksekusi CPU (\textit{CPU Execution Provider}).
@@ -952,12 +954,14 @@ Data latensi yang dikumpulkan dari fase pengujian kemudian dianalisis secara sta
         p50 = \begin{cases} t_{\frac{n+1}{2}} & \text{jika } n \text{ ganjil} \\ \frac{1}{2} (t_{\frac{n}{2}} + t_{\frac{n}{2}+1}) & \text{jika } n \text{ genap} \end{cases}
         \label{eq:p50}
     \end{equation}
+    \daftarpersamaan{Latensi p50 (Median)}
 
     \item p95 (Persentil ke-95): Merepresentasikan ambang batas waktu di mana 95\% dari total sampel inferensi lebih cepat dari nilai tersebut. Metrik ini digunakan untuk mengukur performa dalam skenario terburuk (\textit{tail latency}), memastikan sistem tetap responsif bahkan saat memproses citra yang kompleks atau dalam kondisi beban tinggi. Nilai p95 dihitung sesuai Persamaan \ref{eq:p95}:
     \begin{equation}
         p95 = t_{\lceil 0.95 \cdot n \rceil}
         \label{eq:p95}
     \end{equation}
+    \daftarpersamaan{Latensi p95 (Persentil ke-95)}
 \end{enumerate}
 
 Setelah tahap evaluasi, dilakukan \textit{benchmarking} dengan menganalisis hubungan antara mAP dan latensi melalui grafik \textit{Pareto frontier}. Grafik \textit{Pareto frontier} digunakan untuk mengidentifikasi sekumpulan model yang memberikan kombinasi performa terbaik tanpa ada model lain yang lebih unggul di kedua aspek secara bersamaan \parencite{shakyaSmallObjectDetectionEdge2026}. Visualisasi contoh grafik \textit{Pareto frontier} disajikan pada Gambar \ref{fig:pareto_curve}. Analisis ini bertujuan untuk mengidentifikasi varian model yang menawarkan latensi paling minimal dengan tetap mempertahankan performa deteksi yang optimal.
@@ -987,35 +991,41 @@ Berikut adalah metrik-metrik yang digunakan dalam evaluasi:
         MRR = \frac{1}{|Q|} \sum_{i=1}^{|Q|} \frac{1}{rank_i}
         \label{eq:mrr}
     \end{equation}
+    \daftarpersamaan{Mean Reciprocal Rank (MRR)}
     di mana $|Q|$ adalah jumlah kueri dan $rank_i$ adalah posisi peringkat dokumen relevan pertama untuk kueri ke-$i$.
 
-    \item \textit{Normalized Discounted Cumulative Gain} (nDCG@k) \\
-    nDCG@k mengevaluasi kualitas pemeringkatan dengan mempertimbangkan posisi dokumen relevan dalam daftar hasil. Dokumen relevan yang muncul di posisi lebih tinggi akan memberikan kontribusi skor yang lebih besar. Metrik ini dihitung dengan membagi \textit{Discounted Cumulative Gain} (DCG) dengan \textit{Ideal DCG} (IDCG).
+    \item \textit{Normalized Discounted Cumulative Gain} (NDCG@k) \\
+    NDCG@k mengevaluasi kualitas pemeringkatan dengan mempertimbangkan posisi dokumen relevan dalam daftar hasil. Dokumen relevan yang muncul di posisi lebih tinggi akan memberikan kontribusi skor yang lebih besar. Metrik ini dihitung dengan membagi \textit{Discounted Cumulative Gain} (DCG) dengan \textit{Ideal DCG} (IDCG).
 
     Nilai DCG pada peringkat ke-$k$ didefinisikan pada Persamaan \ref{eq:dcg} sebagai akumulasi skor relevansi yang didiskon secara logaritmik:
     \begin{equation}
         DCG@k = \sum_{i=1}^{k} \frac{rel_i}{\log_2(i+1)}
         \label{eq:dcg}
     \end{equation}
+    \daftarpersamaan{Discounted Cumulative Gain (DCG@k)}
 
     Sedangkan IDCG adalah nilai DCG maksimal yang dapat dicapai jika dokumen-dokumen relevan diurutkan pada posisi ideal (paling atas) sebagaimana ditunjukkan pada Persamaan \ref{eq:idcg}:
     \begin{equation}
         IDCG@k = \sum_{i=1}^{|REL_k|} \frac{rel_i}{\log_2(i+1)}
         \label{eq:idcg}
     \end{equation}
+    \daftarpersamaan{Ideal Discounted Cumulative Gain (IDCG@k)}
 
-    Sehingga, nilai nDCG@k diperoleh melalui Persamaan \ref{eq:ndcg}:
+    Sehingga, nilai NDCG@k diperoleh melalui Persamaan \ref{eq:ndcg}:
     \begin{equation}
-        nDCG@k = \frac{DCG@k}{IDCG@k}
+        NDCG@k = \frac{DCG@k}{IDCG@k}
         \label{eq:ndcg}
     \end{equation}
+    \daftarpersamaan{Normalized Discounted Cumulative Gain (NDCG@k)}
     Metrik ini digunakan untuk memastikan bahwa algoritma pencarian tidak hanya menemukan dokumen yang benar, tetapi juga mampu mengurutkannya berdasarkan tingkat kepentingannya.
 
     \item \textit{Recall}@k \\
     Recall@k mengukur proporsi dokumen relevan yang berhasil ditemukan dalam $k$ hasil teratas dibandingkan dengan total dokumen relevan yang tersedia untuk kueri tersebut.
     \begin{equation}
         Recall@k = \frac{|\{ \text{dokumen relevan} \} \cap \{ \text{dokumen terambil dalam top-}k \}|}{|\{ \text{total dokumen relevan} \}|}
+        \label{eq:recall_at_k}
     \end{equation}
+    \daftarpersamaan{Recall@k}
     Metrik ini penting untuk mengevaluasi cakupan (\textit{coverage}) sistem dalam menyajikan berbagai perspektif informasi yang mungkin tersebar di beberapa dokumen.
 \end{enumerate}
 

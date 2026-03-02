@@ -472,7 +472,7 @@ Gambar \ref{fig:metadata_filtering_test} memperlihatkan dampak penerapan filter.
 \section{Hasil Perancangan dan Pengembangan Modul Pencarian Informasi}
 Pengujian performa pada modul pencarian informasi dilakukan untuk menentukan konfigurasi RAG yang paling efektif. Evaluasi dilakukan secara bertahap, dimulai dari seleksi strategi \textit{hybrid search} terbaik, kemudian dilanjutkan dengan pengujian dampak penambahan komponen \textit{reranker}.
 
-Hasil benchmarking pada tahap seleksi \textit{retriever} ditunjukkan pada Tabel~\ref{tab:retrieval_benchmark}. Empat kombinasi utama diuji, yaitu Gemini + BM25, OpenAI + BM25, Gemini + SPLADE, dan OpenAI + SPLADE. Seluruh konfigurasi menunjukkan performa tinggi dengan skor nDCG@5, Recall@5, dan MRR@5 di atas 0.92. Gemini + BM25 mencatatkan skor tertinggi pada seluruh metrik, yaitu nDCG@5 sebesar 0.939, Recall@5 sebesar 0.968, dan MRR@5 sebesar 0.945. Selisih performa dengan OpenAI + BM25 sangat tipis, namun Gemini + BM25 dipilih sebagai \textit{base retriever} karena konsistensi skor tertinggi dan efisiensi biaya.
+Hasil benchmarking pada tahap seleksi \textit{retriever} ditunjukkan pada Tabel~\ref{tab:retrieval_benchmark}. Empat kombinasi utama diuji, yaitu Gemini + BM25, OpenAI + BM25, Gemini + SPLADE, dan OpenAI + SPLADE. Seluruh konfigurasi menunjukkan performa tinggi dengan skor NDCG@5, Recall@5, dan MRR@5 di atas 0.92. Gemini + BM25 mencatatkan skor tertinggi pada seluruh metrik, yaitu NDCG@5 sebesar 0.939, Recall@5 sebesar 0.968, dan MRR@5 sebesar 0.945. Selisih performa dengan OpenAI + BM25 sangat tipis, namun Gemini + BM25 dipilih sebagai \textit{base retriever} karena konsistensi skor tertinggi dan efisiensi biaya.
 
 \begin{table}[H]
     \centering
@@ -481,7 +481,7 @@ Hasil benchmarking pada tahap seleksi \textit{retriever} ditunjukkan pada Tabel~
     \small
     \begin{tabular}{|l|c|c|c|}
         \hline
-        \textbf{Konfigurasi} & \textbf{nDCG@5} & \textbf{Recall@5} & \textbf{MRR@5} \\ \hline
+        \textbf{Konfigurasi} & \textbf{NDCG@5} & \textbf{Recall@5} & \textbf{MRR@5} \\ \hline
         Gemini + BM25 & 0.939 & 0.968 & 0.945 \\ \hline
         OpenAI + BM25 & 0.936 & 0.968 & 0.942 \\ \hline
         Gemini + SPLADE & 0.931 & 0.966 & 0.931 \\ \hline
@@ -489,7 +489,7 @@ Hasil benchmarking pada tahap seleksi \textit{retriever} ditunjukkan pada Tabel~
     \end{tabular}
 \end{table}
 
-Setelah konfigurasi \textit{base retriever} ditetapkan, pengujian dilanjutkan dengan mengevaluasi dampak penambahan komponen \textit{reranker}. Hasil perbandingan kinerja reranking divisualisasikan pada Gambar~\ref{fig:reranker_comparison}. Grafik tersebut memperlihatkan bahwa penambahan reranker memberikan peningkatan signifikan pada seluruh metrik evaluasi. Metode cross-encoder \texttt{rerank-2.5} dari Voyage AI menghasilkan skor tertinggi, dengan nDCG@5 mencapai 0.954, MRR 0.938, dan Recall@5 sebesar 0.981. Sementara itu, reranker late interaction menggunakan \texttt{jina-colbert-v2} juga meningkatkan performa dibandingkan tanpa reranker, namun masih berada di bawah cross-encoder. Tanpa reranker, skor nDCG@5, MRR, dan Recall@5 masing-masing hanya 0.885, 0.860, dan 0.942.
+Setelah konfigurasi \textit{base retriever} ditetapkan, pengujian dilanjutkan dengan mengevaluasi dampak penambahan komponen \textit{reranker}. Hasil perbandingan kinerja reranking divisualisasikan pada Gambar~\ref{fig:reranker_comparison}. Grafik tersebut memperlihatkan bahwa penambahan reranker memberikan peningkatan signifikan pada seluruh metrik evaluasi. Metode cross-encoder \texttt{rerank-2.5} dari Voyage AI menghasilkan skor tertinggi, dengan NDCG@5 mencapai 0.954, MRR 0.938, dan Recall@5 sebesar 0.981. Sementara itu, reranker late interaction menggunakan \texttt{jina-colbert-v2} juga meningkatkan performa dibandingkan tanpa reranker, namun masih berada di bawah cross-encoder. Tanpa reranker, skor NDCG@5, MRR, dan Recall@5 masing-masing hanya 0.885, 0.860, dan 0.942.
 
 \begin{figure}[H]
     \centering
@@ -498,7 +498,7 @@ Setelah konfigurasi \textit{base retriever} ditetapkan, pengujian dilanjutkan de
     \label{fig:reranker_comparison}
 \end{figure}
 
-Analisis hasil ini menunjukkan bahwa penambahan reranker, khususnya model cross-encoder, berkontribusi positif dalam memperbaiki peringkat dokumen pada hasil pencarian. Peningkatan skor nDCG@5 dan Recall@5 menandakan bahwa sistem mampu menyajikan proporsi dokumen relevan yang lebih baik dalam lima urutan teratas, sedangkan kenaikan MRR mengindikasikan bahwa dokumen yang paling relevan cenderung muncul di posisi yang lebih awal. Berdasarkan hasil tersebut, konfigurasi yang menggabungkan hybrid search (Gemini + BM25) dan reranker Voyage AI 2.5 dipilih sebagai fondasi modul pencarian informasi untuk mendukung agen dalam memperoleh konteks yang diperlukan sebelum menghasilkan jawaban.
+Analisis hasil ini menunjukkan bahwa penambahan reranker, khususnya model cross-encoder, berkontribusi positif dalam memperbaiki peringkat dokumen pada hasil pencarian. Peningkatan skor NDCG@5 dan Recall@5 menandakan bahwa sistem mampu menyajikan proporsi dokumen relevan yang lebih baik dalam lima urutan teratas, sedangkan kenaikan MRR mengindikasikan bahwa dokumen yang paling relevan cenderung muncul di posisi yang lebih awal. Berdasarkan hasil tersebut, konfigurasi yang menggabungkan hybrid search (Gemini + BM25) dan reranker Voyage AI 2.5 dipilih sebagai fondasi modul pencarian informasi untuk mendukung agen dalam memperoleh konteks yang diperlukan sebelum menghasilkan jawaban.
 
 \section{Hasil Perancangan dan Pengembangan Antarmuka Sistem Agentik}
 Implementasi antarmuka sistem berbasis web telah berhasil mengintegrasikan seluruh kapabilitas agen ke dalam pengalaman pengguna yang intuitif. Antarmuka ini dirancang untuk memfasilitasi interaksi natural antara pengguna dan agen cerdas, mendukung input multimodal (teks dan gambar), serta menyediakan transparansi langkah agen (\textit{thought process}) yang dapat diakses pengguna. Tampilan utama antarmuka sistem yang telah dikembangkan disajikan pada Gambar \ref{fig:hasil_antarmuka}.
@@ -765,7 +765,7 @@ Berdasarkan serangkaian pengujian yang telah dilakukan, dilakukan analisis untuk
 
 Pada pengujian modul deteksi objek, model YOLOv11 dan OWLv2 dievaluasi berdasarkan keseimbangan antara akurasi dan latensi. Analisis \textit{Pareto frontier} menunjukkan bahwa model YOLOv11-small merupakan pilihan paling optimal untuk deteksi \textit{closed-set} dengan mAP@50 mencapai 89,16\% dan latensi inferensi yang rendah sekitar 47 ms. Sementara itu, meskipun model OWLv2 memiliki latensi yang jauh lebih tinggi ($\approx$ 2,5 detik), kemampuannya dalam melakukan deteksi \textit{open-vocabulary} terbukti krusial untuk menangani objek di luar kategori daun, memberikan fleksibilitas yang signifikan bagi sistem tanpa mengorbankan pengalaman pengguna secara berlebihan.
 
-Dalam aspek pencarian informasi, konfigurasi \textit{hybrid search} yang menggabungkan BM25 dan model embedding Gemini, diperkuat dengan \textit{reranker} Voyage AI 2.5, terbukti memberikan kinerja terbaik. Kombinasi ini menghasilkan skor nDCG@5 sebesar 0,954, yang menjamin bahwa informasi yang diambil untuk memperkaya konteks agen memiliki relevansi yang sangat tinggi. Keberhasilan mekanisme \textit{metadata filtering} dan pencarian multimodal juga memastikan bahwa agen memiliki akses yang presisi terhadap basis pengetahuan, meminimalkan risiko halusinasi akibat konteks yang salah.
+Dalam aspek pencarian informasi, konfigurasi \textit{hybrid search} yang menggabungkan BM25 dan model embedding Gemini, diperkuat dengan \textit{reranker} Voyage AI 2.5, terbukti memberikan kinerja terbaik. Kombinasi ini menghasilkan skor NDCG@5 sebesar 0,954, yang menjamin bahwa informasi yang diambil untuk memperkaya konteks agen memiliki relevansi yang sangat tinggi. Keberhasilan mekanisme \textit{metadata filtering} dan pencarian multimodal juga memastikan bahwa agen memiliki akses yang presisi terhadap basis pengetahuan, meminimalkan risiko halusinasi akibat konteks yang salah.
 
 Kinerja agen secara keseluruhan menunjukkan hasil yang sangat positif, terutama pada data \textit{In-Distribution} (ID) dengan akurasi pencapaian tujuan (\textit{Agent Goal Accuracy}) rata-rata sebesar 95\%. Protokol keamanan dan aturan kebenaran (\textit{truthfulness rules}) yang diterapkan terbukti efektif, ditandai dengan skor kepatuhan domain (\textit{Domain Adherence}) yang sempurna (1,00) pada pengujian multi-tahap. Agen mampu menangani berbagai kasus batas dan gangguan konteks dengan tetap mempertahankan persona sebagai ahli patologi tanaman, serta secara konsisten menolak permintaan yang berpotensi tidak aman atau di luar domain.
 
